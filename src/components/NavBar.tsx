@@ -19,7 +19,7 @@ export default function NavBar() {
 						<a key={link.name} href={link.link}>
 							<span className="tracking-widest capitalize group transition duration-300">
 								{link.name.toUpperCase()}
-								<span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary"></span>
+								<span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary" />
 							</span>
 						</a>
 					))}
