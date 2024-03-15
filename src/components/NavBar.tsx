@@ -11,7 +11,7 @@ const links = [
 
 export default function NavBar() {
 	return (
-		<nav className="m-8">
+		<nav className="hidden md:block m-8">
 			<div className="flex justify-between">
 				<Image src="/logo.svg" alt="Nova" width={100} height={100} />
 				<div className="flex items-center justify-center gap-8 font-paradisio capitalize">
