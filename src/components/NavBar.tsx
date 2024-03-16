@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 const links = [
 	{ name: 'About', link: '#about' },
-	{ name: 'Schedule', link: '#schedule' },
-	{ name: 'Speakers', link: '#speakers' },
-	{ name: 'Prizes', link: '#prizes' },
-	{ name: 'Sponsors', link: '#sponsors' },
-	{ name: 'FAQ', link: '#faq' },
+	{ name: 'Schedule', link: '#coming-soon' },
+	{ name: 'Speakers', link: '#coming-soon' },
+	{ name: 'Prizes', link: '#coming-soon' },
+	{ name: 'Sponsors', link: '#coming-soon' },
+	{ name: 'FAQ', link: '#coming-soon' },
 ] as const;
 
 export default function NavBar() {
