@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LandingSection() {
 	return (
@@ -21,6 +22,19 @@ export default function LandingSection() {
 						Presented by{' '}
 						<span className="text-primary">ScottyLabs</span>
 					</div>
+				</div>
+				<div className="mt-8 sm:mt-12">
+					<Link
+						href="http://go.scottylabs.org/nova"
+						className="inline-block w-fit text-center"
+					>
+						<Image
+							src="/register.svg"
+							alt="Register"
+							width={259}
+							height={69}
+						/>
+					</Link>
 				</div>
 			</div>
 		</section>
