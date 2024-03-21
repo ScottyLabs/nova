@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const links = [
 	{ name: 'About', link: '#about' },
-	{ name: 'Schedule', link: '#coming-soon' },
+	{ name: 'Schedule', link: '#schedule' },
 	{ name: 'Speakers', link: '#coming-soon' },
 	{ name: 'Prizes', link: '#coming-soon' },
 	{ name: 'Sponsors', link: '#coming-soon' },

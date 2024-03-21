@@ -2,6 +2,7 @@ import ComingSoonSection from '@/components/ComingSoonSection';
 import LandingSection from '@/components/LandingSection';
 import AboutSection from '@/components/AboutSection';
 import Separator from '@/components/Separator';
+import Schedule from '@/components/Schedule';
 
 export default function Home() {
 	return (
@@ -9,6 +10,7 @@ export default function Home() {
 			<LandingSection />
 			<Separator />
 			<ComingSoonSection />
+			<Schedule />
 			<AboutSection />
 		</main>
 	);
