@@ -49,14 +49,14 @@ export default function Schedule() {
 			date: 'Saturday, March 30',
 			svg: '/dates/saturday_march_30.svg',
 			items: [
-				{ time: '4:30-6:30pm', title: 'Project Expo (Swartz Center)' },
+				{ time: '4:30-6:30pm', title: 'Project Expo (Swartz)' },
 				{
 					time: '6:30-7:30pm',
-					title: 'Dinner & Judging (Swartz Center)',
+					title: 'Dinner & Judging (Swartz)',
 				},
 				{
 					time: '7:30-8:30pm',
-					title: 'Closing Ceremony (Swartz Center)',
+					title: 'Closing Ceremony (Swartz)',
 				},
 			],
 		},
