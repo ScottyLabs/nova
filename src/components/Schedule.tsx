@@ -6,9 +6,9 @@ export default function Schedule() {
 			date: 'Saturday, March 23',
 			svg: '/dates/saturday_march_23.svg',
 			items: [
-				{ time: '12:00pm', title: 'Opening Ceremony' },
-				{ time: '1:00pm', title: 'Lunch' },
-				{ time: '12:00am', title: 'Proposals Due' },
+				{ time: '12:00pm', title: 'Opening Ceremony (GHC 4307)' },
+				{ time: '1:00pm', title: 'Lunch (GHC 4307)' },
+				{ time: '12:00am', title: 'Proposals Due (GHC 4307)' },
 			],
 		},
 		{
@@ -49,9 +49,9 @@ export default function Schedule() {
 			date: 'Saturday, March 30',
 			svg: '/dates/saturday_march_30.svg',
 			items: [
-				{ time: '4:30-6:30pm', title: 'Project Expo' },
-				{ time: '6:30-7:30pm', title: 'Dinner & Judging' },
-				{ time: '7:30-8:30pm', title: 'Closing Ceremony' },
+				{ time: '4:30-6:30pm', title: 'Project Expo (Swartz Center)' },
+				{ time: '6:30-7:30pm', title: 'Dinner & Judging (Swartz Center)' },
+				{ time: '7:30-8:30pm', title: 'Closing Ceremony (Swartz Center)' },
 			],
 		},
 	];
