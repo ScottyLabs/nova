@@ -50,8 +50,14 @@ export default function Schedule() {
 			svg: '/dates/saturday_march_30.svg',
 			items: [
 				{ time: '4:30-6:30pm', title: 'Project Expo (Swartz Center)' },
-				{ time: '6:30-7:30pm', title: 'Dinner & Judging (Swartz Center)' },
-				{ time: '7:30-8:30pm', title: 'Closing Ceremony (Swartz Center)' },
+				{
+					time: '6:30-7:30pm',
+					title: 'Dinner & Judging (Swartz Center)',
+				},
+				{
+					time: '7:30-8:30pm',
+					title: 'Closing Ceremony (Swartz Center)',
+				},
 			],
 		},
 	];
@@ -59,11 +65,11 @@ export default function Schedule() {
 	return (
 		<section
 			id="schedule"
-			className="py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center w-full"
+			className="py-14 px-4 sm:px-6 sm:py-8 lg:px-8 flex flex-col items-center justify-center w-full"
 		>
 			<div className="max-w-3xl mx-auto flex items-center justify-center flex-col h-full relative w-full">
 				{scheduleItems.map((day, index) => (
-					<div key={index} className="mb-16">
+					<div key={index} className="mb-16 w-full sm:w-auto">
 						<div className="relative w-full h-32 sm:h-40 mb-4">
 							<Image
 								src={day.svg}
@@ -72,8 +78,8 @@ export default function Schedule() {
 								layout="fill"
 							/>
 						</div>
-						<div className="w-[1011px] h-[233px] flex-shrink-0 border-2 border-[#41F168] rounded-[23px] px-8 py-6 flex items-center justify-center">
-							<div className="w-[884px] h-[192px] flex-shrink-0">
+						<div className="w-full sm:w-[1011px] h-[233px] flex-shrink-0 border-2 border-[#41F168] rounded-[23px] px-4 sm:px-8 py-6 flex items-center justify-center">
+							<div className="w-full sm:w-[884px] h-full flex-shrink-0">
 								{day.items.length > 0 ? (
 									<>
 										{day.items.map((item, itemIndex) => (
@@ -81,7 +87,7 @@ export default function Schedule() {
 												key={itemIndex}
 												className="mb-1"
 											>
-												<div className="text-[#CEFFD9] font-paradisio font-normal text-[41.493px] leading-[55.324px]">
+												<div className="text-[#CEFFD9] font-paradisio font-normal text-[24px] sm:text-[41.493px] leading-[32px] sm:leading-[55.324px]">
 													{item.time} - {item.title}
 												</div>
 											</div>
@@ -94,6 +100,7 @@ export default function Schedule() {
 											alt="Coming Soon"
 											width={701}
 											height={160}
+											className="w-full sm:w-auto"
 										/>
 									</div>
 								)}
