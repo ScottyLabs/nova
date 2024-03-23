@@ -5,8 +5,8 @@ const links = [
 	{ name: 'Schedule', link: '#schedule' },
 	{ name: 'Speakers', link: '#coming-soon' },
 	{ name: 'Prizes', link: '#coming-soon' },
-	{ name: 'Sponsors', link: '#coming-soon' },
-	{ name: 'FAQ', link: '#coming-soon' },
+	// { name: 'Sponsors', link: '#coming-soon' },
+	// { name: 'FAQ', link: '#coming-soon' },
 ] as const;
 
 export default function NavBar() {
