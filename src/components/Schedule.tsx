@@ -19,7 +19,9 @@ export default function Schedule() {
 		{
 			date: 'Monday, March 25',
 			svg: '/dates/monday_march_25.svg',
-			items: [{ time: '6:00-7:00pm', title: 'Chris Atkeson Talk (GHC 5222)' }],
+			items: [
+				{ time: '6:00-7:00pm', title: 'Chris Atkeson Talk (GHC 5222)' },
+			],
 		},
 		{
 			date: 'Tuesday, March 26',
