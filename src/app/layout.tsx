@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 import localFont from 'next/font/local';
-import NavBar from '@/components/NavBar';
 
 const diatypeFont = localFont({
 	src: '../fonts/diatype-condensed-regular.woff2',
@@ -33,12 +32,11 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="scroll-smooth">
 			<head>
-				<link rel="icon" href="/favicon.ico" sizes="any" />
+				<link rel="icon" href="/favicon2.ico" sizes="any" />
 			</head>
 			<body
 				className={`${diatypeFont.variable} ${paridisioFont.variable} ${stretchSansFont.variable} bg-background`}
 			>
-				<NavBar />
 				{children}
 			</body>
 		</html>
