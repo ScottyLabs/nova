@@ -2,7 +2,7 @@ import TopBar from '@/components/TopBar';
 import { useEffect, useState } from 'react';
 
 const START_DATE = new Date('2024-11-09T11:00:00.000-05:00');
-const END_DATE = new Date('2024-11-09T17:30:00.000-05:00');
+const END_DATE = new Date('2024-11-09T17:45:00.000-05:00');
 
 const EVENTS = [
 	['10:30', '11:00', 'Opening Ceremony'],
