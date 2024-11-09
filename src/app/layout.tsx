@@ -18,6 +18,11 @@ const stretchSansFont = localFont({
 	display: 'swap',
 	variable: '--font-stretch-sans',
 });
+const dinFont = localFont({
+	src: '../fonts/DIN-2014_Regular.otf',
+	display: 'swap',
+	variable: '--font-din',
+});
 
 export const metadata: Metadata = {
 	title: 'Nova',
@@ -32,10 +37,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="scroll-smooth">
 			<head>
-				<link rel="icon" href="/favicon2.ico" sizes="any" />
+				<link rel="icon" href="/favicon.ico" sizes="any" />
 			</head>
 			<body
-				className={`${diatypeFont.variable} ${paridisioFont.variable} ${stretchSansFont.variable} bg-background`}
+				className={`${diatypeFont.variable} ${paridisioFont.variable} ${stretchSansFont.variable} ${dinFont.variable} bg-background`}
 			>
 				{children}
 			</body>

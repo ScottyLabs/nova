@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import TopBar from '@/components/TopBar';
 
-export default function TopSection() {
+export default function MainPage() {
 	return (
 		<div>
 			<Image
@@ -11,6 +12,7 @@ export default function TopSection() {
 				width="10000"
 				className="absolute"
 			/>
+			<TopBar />
 			<Link
 				href="https://go.scottylabs.org/nova"
 				className="absolute left-[52.3vw] top-[30vw]"

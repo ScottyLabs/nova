@@ -11,6 +11,8 @@ const config: Config = {
       primary: '#41F168',
       tertiary: '#FD39C3',
       quaternary: '#FF3C00',
+      pink: '#FF90F9',
+      green: '#D4FF33',
     },
     extend: {
       backgroundImage: {
@@ -21,7 +23,11 @@ const config: Config = {
       fontFamily: {
         paradisio: ['var(--font-paridisio)'],
         diatype: ['var(--font-diatype)'],
-        'stretch-sans': ['var(--font-stretch-sans)']
+        'stretch-sans': ['var(--font-stretch-sans)'],
+        din: ['var(--font-din)'],
+      },
+      fontSize: {
+        'xl': '1.3rem',
       }
     },
   },
