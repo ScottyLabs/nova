@@ -33,7 +33,10 @@ export default function Timer() {
 		if (currentTime < startTime) {
 			return startTime - currentTime;
 		}
-		return endTime - currentTime;
+		if (currentTime < endTime) {
+			return endTime - currentTime;
+		}
+		return 0;
 	};
 
 	const getCurrentEvent = () => {
