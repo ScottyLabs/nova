@@ -17,6 +17,9 @@ button {
 p {
   margin: 0;
 }
+img {
+  pointer-events: none;
+}
 .clamp-width {
   max-width: 1500px;
   margin: auto;

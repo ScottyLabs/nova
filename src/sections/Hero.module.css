@@ -24,7 +24,6 @@
   font-family: "Poppins";
   .hero__logo {
     height: 225px;
-    pointer-events: none;
   }
   .hero__date {
     color: hsl(38, 28%, 92%);
