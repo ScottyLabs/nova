@@ -40,6 +40,7 @@
     font-weight: 400;
     text-align: center;
     padding: 0 20px;
+    max-width: 800px;
   }
   .hero__button {
     border: 1px solid #f1ede6;
@@ -49,6 +50,15 @@
     color: #f1ede6;
     border-radius: 70px;
     margin-top: 50px;
+    transition: 0.1s ease;
+    will-change: scale;
+    &:hover {
+      scale: 1.04;
+      background: rgba(0, 0, 0, 0);
+      &:active {
+        scale: 1;
+      }
+    }
   }
 }
 

@@ -1,0 +1,76 @@
+.footer-container {
+  height: 450px;
+  position: relative;
+  background: linear-gradient(
+      180deg,
+      #101c1c 0%,
+      #101c1c 18.73%,
+      #173c46 43.9%,
+      #226981 59.42%,
+      #33b2e2 74.95%,
+      #f1ede6 86.12%,
+      #ff8945 100.25%,
+      #14478f 100.39%
+    ),
+    rgba(0, 0, 0, 0.2);
+  .left-section {
+    position: absolute;
+    top: 190px;
+    left: 60px;
+    img {
+      height: 80px;
+      display: block;
+      @media screen and (max-width: 1000px) {
+        height: 60px;
+      }
+    }
+    span {
+      display: block;
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #ffffff;
+      font-weight: 500;
+      font-family: "Poppins";
+    }
+  }
+  .lines--large {
+    position: absolute;
+    top: 140px;
+    right: 0px;
+    width: 600px;
+    opacity: 0.8;
+  }
+  .lines--small {
+    display: none;
+    position: absolute;
+    top: 100px;
+    right: 0px;
+    height: 100px;
+  }
+  @media screen and (max-width: 1000px) {
+    .lines--large {
+      display: none;
+    }
+    .lines--small {
+      display: block;
+    }
+  }
+  @media screen and (max-width: 470px) {
+    .lines--small {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .footer-container {
+    height: 300px;
+    .left-section {
+      top: 120px;
+      left: 40px;
+      @media screen and (max-width: 600px) {
+        left: 20px;
+      }
+    }
+  }
+}
