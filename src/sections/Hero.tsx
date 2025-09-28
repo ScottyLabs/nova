@@ -2,7 +2,7 @@ import novaLogo from "../assets/nova.png";
 import headerStar from "../assets/nova-star.png";
 import novaStreak from "../assets/nova-streak-long.png";
 import css from "./Hero.module.css";
-import clsx from "clsx";
+import shortStreak from "../assets/short-streak.png";
 export function Hero() {
   return (
     <section className={css["hero-section-bg"]}>

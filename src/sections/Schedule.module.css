@@ -1,0 +1,127 @@
+.schedule-section {
+  background-color: #101c1c;
+}
+.header {
+  position: relative;
+  height: 100px;
+  margin: auto;
+
+  .header__left {
+    position: absolute;
+    left: 0;
+    max-width: 40%;
+    height: auto;
+    max-height: 100px;
+  }
+  .header__right {
+    position: absolute;
+    right: 0;
+    max-width: 40%;
+    height: auto;
+    max-height: 100px;
+  }
+  .header__star {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 120px;
+  }
+}
+.timeslots {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 80px 0 150px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.timeslot-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  color: #f1ede6;
+  margin: auto;
+
+  &.timeslot-container--right {
+    align-items: flex-end;
+  }
+  &.timeslot-container--left {
+    align-items: flex-start;
+  }
+
+  .time {
+    font-size: 2.75rem;
+    @media screen and (max-width: 700px) {
+      font-size: 1.5rem;
+    }
+  }
+  .suffix {
+    font-size: 1.5rem;
+  }
+  .details {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.25rem;
+    color: #ff8945;
+    margin-top: -6px;
+    img {
+      height: 20px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 1.125rem;
+    }
+  }
+}
+/* design 100, coding 0 */
+.timeslot-container {
+  &:nth-child(1) {
+    right: 5vw;
+  }
+  &:nth-child(2) {
+    right: 16vw;
+    @media screen and (max-width: 500px) {
+      right: 3vw;
+    }
+  }
+  &:nth-child(3) {
+    left: 4vw;
+    @media screen and (max-width: 500px) {
+      left: -9vw;
+    }
+  }
+  &:nth-child(4) {
+    left: -8vw;
+    @media screen and (max-width: 500px) {
+      left: 18vw;
+    }
+  }
+
+  &:nth-child(5) {
+    left: 18vw;
+    @media screen and (max-width: 500px) {
+      left: 6vw;
+    }
+  }
+  &:nth-child(6) {
+    left: 1vw;
+    @media screen and (max-width: 500px) {
+      left: 28vw;
+    }
+  }
+}
+.ellipse-1 {
+  position: absolute;
+  height: 500px;
+  top: 60px;
+  left: 75vw;
+  z-index: -1;
+}
+.ellipse-2 {
+  position: absolute;
+  height: 800px;
+  top: 300px;
+  right: 75vw;
+  z-index: -1;
+}
