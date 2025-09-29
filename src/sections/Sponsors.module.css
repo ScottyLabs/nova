@@ -22,13 +22,17 @@
   img {
     height: 40px;
   }
+  @media screen and (min-width: 1400px) {
+    justify-content: left;
+  }
+
   @media screen and (max-width: 600px) {
-    gap: 10px;
+    gap: 15px;
     margin-top: 20px;
     padding: 0 20px;
 
     img {
-      height: 20px;
+      height: 25px;
     }
   }
 }

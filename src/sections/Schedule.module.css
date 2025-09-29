@@ -30,6 +30,9 @@
     transform: translate(-50%, 0);
     height: 120px;
     animation: 10s rotate infinite linear;
+    @media screen and (max-width: 600px) {
+      height: 80px;
+    }
   }
 }
 @keyframes rotate {
