@@ -24,7 +24,9 @@ export function Hero() {
               MidJourney, and Eleven Labs, participants can freely experiment
               and bring their ideas to life.
             </p>
-            <button className={css["hero__button"]}>Register</button>
+            <a href="https://forms.gle/ErgwGjPWs6xtihnr7">
+              <button className={css["hero__button"]}>Register</button>
+            </a>
           </div>
         </div>
       </div>
