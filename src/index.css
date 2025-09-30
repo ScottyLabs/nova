@@ -11,6 +11,7 @@
 body {
   margin: 0;
   background-color: #101c1c;
+  overflow-x: hidden;
 }
 button {
   cursor: pointer;

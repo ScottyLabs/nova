@@ -127,13 +127,15 @@ export default function Schedule() {
         <img className={css["header__star"]} src={bigStar} alt="" />
         <img className={css["header__right"]} src={linesRight} alt="" />
       </div>
-      <div className={css["timeslots"]}>
-        {/* extra wrapper div for nth child css selection */}
-        {schedule.map((timeSlot) => (
-          <TimeSlot {...timeSlot} key={timeSlot.detail} />
-        ))}
-        <img className={css["ellipse-1"]} src={ellipse} alt="" />
-        <img className={css["ellipse-2"]} src={ellipse} alt="" />
+      <div className="clamp-width">
+        <div className={css["timeslots"]}>
+          {/* extra wrapper div for nth child css selection */}
+          {schedule.map((timeSlot) => (
+            <TimeSlot {...timeSlot} key={timeSlot.detail} />
+          ))}
+          <img className={css["ellipse-1"]} src={ellipse} alt="" />
+          <img className={css["ellipse-2"]} src={ellipse} alt="" />
+        </div>
       </div>
     </section>
   );
