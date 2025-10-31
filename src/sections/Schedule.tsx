@@ -15,6 +15,18 @@ interface ITimeSlot {
 const schedule: ITimeSlot[] = [
   {
     start: {
+      time: "10:00",
+      suffix: "AM",
+    },
+    end: {
+      time: "10:30",
+      suffix: "AM",
+    },
+    direction: "right",
+    detail: "Checkin + Team Formation",
+  },
+  {
+    start: {
       time: "10:30",
       suffix: "AM",
     },
@@ -55,7 +67,7 @@ const schedule: ITimeSlot[] = [
       suffix: "PM",
     },
     end: {
-      time: "7:15",
+      time: "7:45",
       suffix: "PM",
     },
     direction: "left",
@@ -63,11 +75,11 @@ const schedule: ITimeSlot[] = [
   },
   {
     start: {
-      time: "7:15",
+      time: "7:45",
       suffix: "PM",
     },
     end: {
-      time: "8:00",
+      time: "8:30",
       suffix: "PM",
     },
     direction: "right",
@@ -75,7 +87,7 @@ const schedule: ITimeSlot[] = [
   },
   {
     start: {
-      time: "8:00",
+      time: "8:30",
       suffix: "PM",
     },
     direction: "left",
