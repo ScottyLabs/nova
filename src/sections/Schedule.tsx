@@ -71,7 +71,7 @@ const schedule: ITimeSlot[] = [
       suffix: "PM",
     },
     direction: "left",
-    detail: "Presentations",
+    detail: "Judging",
   },
   {
     start: {
