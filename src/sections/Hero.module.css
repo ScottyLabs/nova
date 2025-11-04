@@ -20,10 +20,12 @@
   margin: 150px auto;
   max-width: 1000px;
   display: flex;
-  padding: 0 10px;
+
   flex-direction: column;
   align-items: center;
   font-family: "Poppins";
+  padding: 0 30px;
+
   .hero__logo {
     width: 100%;
     max-width: 500px;
@@ -39,7 +41,6 @@
     margin-top: 15px;
     font-weight: 400;
     text-align: center;
-    padding: 0 20px;
     max-width: 800px;
   }
   .hero__button {
@@ -58,6 +59,18 @@
       &:active {
         scale: 1;
       }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    align-items: flex-start;
+    .hero__description {
+      text-align: left;
+      font-size: 14px;
+    }
+    .hero__logo {
+      position: relative;
+      transform: translate(-12%, 0);
+      /* left: -30px; */
     }
   }
 }

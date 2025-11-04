@@ -1,4 +1,5 @@
 .schedule-section {
+  overflow-x: hidden;
 }
 .header {
   position: relative;
@@ -99,6 +100,9 @@
 .timeslot-container {
   &:nth-child(1) {
     right: 5%;
+    @media screen and (max-width: 500px) {
+      right: 80px;
+    }
   }
   &:nth-child(2) {
     right: 16%;
@@ -106,7 +110,7 @@
       right: 12%;
     }
     @media screen and (max-width: 400px) {
-      right: 0%;
+      right: 80px;
     }
   }
   &:nth-child(3) {
@@ -115,7 +119,7 @@
       left: -6%;
     }
     @media screen and (max-width: 400px) {
-      left: -9%;
+      left: 50px;
     }
   }
   &:nth-child(4) {
@@ -124,14 +128,14 @@
       left: 0%;
     }
     @media screen and (max-width: 400px) {
-      left: 18%;
+      left: 30px;
     }
   }
 
   &:nth-child(5) {
     left: 18%;
     @media screen and (max-width: 500px) {
-      left: 6%;
+      left: 45px;
     }
   }
   &:nth-child(6) {
@@ -140,7 +144,13 @@
       left: 10%;
     }
     @media screen and (max-width: 400px) {
-      left: 28%;
+      left: 3%;
+    }
+  }
+  &:nth-child(7) {
+    left: -10%;
+    @media screen and (max-width: 400px) {
+      left: 10px;
     }
   }
 }
