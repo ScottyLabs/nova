@@ -17,15 +17,15 @@ export function Hero() {
           </div>
           <div className={css["hero-container"]}>
             <img className={css["hero__logo"]} src={novaLogo} alt="" />
-            <p className={css["hero__date"]}>11.8.2025</p>
+            <p className={css["hero__date"]}>11.7.2026</p>
             <p className={css["hero__description"]}>
               Nova is a hackathon designed for you to create and innovate in a
               playground of generative technology. With tools like GPT,
               MidJourney, and Eleven Labs, participants can freely experiment
               and bring their ideas to life.
             </p>
-            <a href="https://forms.gle/ErgwGjPWs6xtihnr7">
-              <button className={css["hero__button"]}>Register</button>
+            <a>
+              <button disabled className={css["hero__button"]}>Registration Opens 10.1.2026</button>
             </a>
           </div>
         </div>

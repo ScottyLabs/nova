@@ -2,6 +2,7 @@
 
 Previous iterations:
 
+- Fall 2025: https://github.com/ScottyLabs/nova/tree/archive/fall-2025
 - Fall 2024: https://github.com/ScottyLabs/nova/tree/archive/fall-2024
 - Spring 2024: https://github.com/ScottyLabs/nova/tree/archive/spring-2024
 

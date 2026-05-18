@@ -19,79 +19,11 @@ const schedule: ITimeSlot[] = [
       suffix: "AM",
     },
     end: {
-      time: "10:30",
-      suffix: "AM",
-    },
-    direction: "right",
-    detail: "Checkin + Team Formation",
-  },
-  {
-    start: {
-      time: "10:30",
-      suffix: "AM",
-    },
-    end: {
-      time: "11:00",
-      suffix: "AM",
-    },
-    direction: "right",
-    detail: "Opening ceremony",
-  },
-  {
-    start: {
-      time: "11:00",
-      suffix: "AM",
-    },
-    end: {
-      time: "6:00",
-      suffix: "PM",
-    },
-    direction: "left",
-    detail: "Hacking Time",
-  },
-  {
-    start: {
-      time: "12:00",
-      suffix: "PM",
-    },
-    end: {
-      time: "1:00",
+      time: "9:00",
       suffix: "PM",
     },
     direction: "right",
-    detail: "Lunch",
-  },
-  {
-    start: {
-      time: "6:00",
-      suffix: "PM",
-    },
-    end: {
-      time: "7:45",
-      suffix: "PM",
-    },
-    direction: "left",
-    detail: "Judging",
-  },
-  {
-    start: {
-      time: "7:45",
-      suffix: "PM",
-    },
-    end: {
-      time: "8:30",
-      suffix: "PM",
-    },
-    direction: "right",
-    detail: "Dinner",
-  },
-  {
-    start: {
-      time: "8:30",
-      suffix: "PM",
-    },
-    direction: "left",
-    detail: "Closing & Awards",
+    detail: "Schedule Will Be Announced Soon",
   },
 ];
 function TimeSlot({ start, end, detail, direction }: ITimeSlot) {
