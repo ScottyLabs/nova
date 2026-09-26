@@ -25,7 +25,7 @@ export function Hero() {
               and bring their ideas to life.
             </p>
             <a>
-              <button disabled className={css["hero__button"]}>Registration Opens 10.1.2026</button>
+              <button disabled className={css["hero__button"]}>Registration Opens 10.4.2026</button>
             </a>
           </div>
         </div>
