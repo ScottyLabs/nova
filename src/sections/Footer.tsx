@@ -22,7 +22,7 @@ export function Footer() {
       <p className={css["date"]}>
         <Scramble text={EVENT_DATE} delay={250} onView />
       </p>
-      <div className={css["credit"]} data-reveal>
+      <div className={css["credit"]}>
         <img src={scottylabs} alt="" />
         <p>
           <Scramble text="With" delay={450} onView />{" "}

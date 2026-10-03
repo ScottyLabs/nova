@@ -38,7 +38,9 @@ export function Scramble({ text, delay = 0, onView = false }: { text: string; de
           io?.disconnect();
           id = window.setTimeout(run, delay);
         },
-        { rootMargin: "0px 0px -10% 0px" }
+        // no inset: footer type sits at the very bottom of the page, and an
+        // inset viewport would never reach it
+        { threshold: 0 }
       );
       io.observe(el.current);
     } else {
