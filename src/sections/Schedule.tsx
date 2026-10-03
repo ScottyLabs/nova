@@ -16,7 +16,7 @@ export function Schedule() {
     <section className={css["schedule"]}>
       <div className="clamp-width">
         <div className={css["head"]} data-reveal>
-          <h2 className="label">Schedule</h2>
+          <h2 className="section-title">Schedule</h2>
           <p className="subhead">
             _{EVENT_DATE} · <Countdown to={new Date("2026-11-07T10:00:00-05:00")} />
           </p>

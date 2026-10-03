@@ -64,7 +64,7 @@ export function Sponsors() {
     <section className={css["sponsors"]}>
       <div className="clamp-width">
         <div className={css["head"]} data-reveal>
-          <h2 className="label">Sponsors</h2>
+          <h2 className="section-title">Sponsors</h2>
         </div>
         {TIERS.map((tier) => (
           <div key={tier.name} className={css["tier"]}>

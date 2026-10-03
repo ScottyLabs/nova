@@ -10,6 +10,7 @@
 
   --font-mono: "Fragment Mono", ui-monospace, Menlo, monospace;
   --font-label: "Inter", system-ui, sans-serif;
+  --font-display: "Michroma", system-ui, sans-serif;
 
   --gutter: clamp(20px, 4vw, 64px);
 
@@ -93,6 +94,15 @@ img {
   letter-spacing: -0.03em;
   line-height: 1.14;
   text-align: justify;
+}
+/* Section titles: Michroma caps, 96% leading, −3% tracking */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
 /* Label: Inter Light, the system's section labels */
 .label {
