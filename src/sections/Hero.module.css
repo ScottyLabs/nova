@@ -190,24 +190,27 @@
    its grid in poster units (--p = 1/1122 of the screen width). Type keeps a
    readable floor, so widths are in em where text wraps. */
 @media (max-width: 700px) {
+  /* the hero fills the screen exactly; the poster composition sits
+     centred in it (--y0 is the spare space above it) */
   .hero {
     --p: calc(100vw / 1122);
-    height: calc(1600 * var(--p));
+    --y0: max(0px, (100svh - 1600 * var(--p)) / 2);
+    height: max(100svh, calc(1600 * var(--p)));
     min-height: 0;
   }
   .presented {
     left: calc(562 * var(--p));
-    top: calc(74 * var(--p));
+    top: calc(var(--y0) + 74 * var(--p));
   }
   .tagline {
     left: calc(84 * var(--p));
-    top: calc(310 * var(--p));
+    top: calc(var(--y0) + 310 * var(--p));
   }
   /* the orbit NOVA, letters 760 wide so the ring (≈1.44×) fits the screen,
      centred where the poster's mark sits */
   .mark {
     left: calc(228 * var(--p));
-    top: calc(490 * var(--p));
+    top: calc(var(--y0) + 490 * var(--p));
     width: calc(760 * var(--p));
   }
   .sub {
@@ -215,26 +218,26 @@
   }
   .sub[data-word="hackathon"] {
     left: calc(755 * var(--p));
-    top: calc(756 * var(--p));
+    top: calc(var(--y0) + 756 * var(--p));
   }
   .sub[data-word="the"] {
     left: calc(161 * var(--p));
-    top: calc(851 * var(--p));
+    top: calc(var(--y0) + 851 * var(--p));
   }
   .sub[data-word="genai"] {
     left: calc(463 * var(--p));
-    top: calc(851 * var(--p));
+    top: calc(var(--y0) + 851 * var(--p));
     > span:first-child {
       margin-left: calc(64 * var(--p));
     }
   }
   .about {
     left: calc(147 * var(--p));
-    top: calc(989 * var(--p));
+    top: calc(var(--y0) + 989 * var(--p));
     width: max(60vw, calc(410 * var(--p)));
   }
   .register {
-    top: calc(1280 * var(--p));
+    top: calc(var(--y0) + 1280 * var(--p));
     font-size: max(12px, calc(30 * var(--p)));
     padding: 0.4em 0.5em;
   }
@@ -242,18 +245,18 @@
   /* star centred on the mark the same way (offsets scaled with it) */
   .star {
     left: calc(-74 * var(--p));
-    top: calc(-27.5 * var(--p));
+    top: calc(var(--y0) + -27.5 * var(--p));
     width: calc(1300 * var(--p));
   }
   .pink[data-pink="left"] {
     left: calc(-40 * var(--p));
-    top: calc(240 * var(--p));
+    top: calc(var(--y0) + 240 * var(--p));
     width: calc(260 * var(--p));
     height: calc(330 * var(--p));
   }
   .pink[data-pink="right"] {
     left: calc(1250 * var(--p));
-    top: calc(-60 * var(--p));
+    top: calc(var(--y0) + -60 * var(--p));
     width: calc(560 * var(--p));
     height: calc(450 * var(--p));
   }
