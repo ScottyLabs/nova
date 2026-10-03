@@ -74,6 +74,12 @@
 li:hover .logo:not([data-light]) img {
   filter: none;
 }
+/* muted sponsors stay grey, hover included */
+.logo[data-muted] img,
+li:hover .logo[data-muted] img {
+  filter: brightness(0);
+  opacity: 0.4;
+}
 /* Mechanize: gear mark + name as one lockup, same area as the rest */
 .logo:has(.wordmark) img {
   width: calc(var(--k) / var(--a));

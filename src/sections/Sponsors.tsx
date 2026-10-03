@@ -23,6 +23,8 @@ interface ISponsor {
   /** white type knocked out of a coloured shape: keep the type light when
       the logo is shown in black */
   knockout?: boolean;
+  /** shown in grey rather than black (smaller sponsorship) */
+  muted?: boolean;
   /** logo is a mark only; set the name beside it */
   mark?: boolean;
   /** width ÷ height of the (ink-trimmed) logo file */
@@ -54,7 +56,7 @@ const TIERS: { name: string; sponsors: ISponsor[] }[] = [
       { name: "D. E. Shaw", logo: deshaw, aspect: 4.101 },
       { name: "Citadel", logo: citadel, aspect: 7.034 },
       { name: "Optiver", logo: optiver, aspect: 3.417 },
-      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
+      { name: "Jane Street", logo: janestreet, muted: true, aspect: 2.4 },
     ],
   },
 ];
@@ -76,6 +78,7 @@ export function Sponsors() {
                     className={css["logo"]}
                     data-light={s.light || undefined}
                     data-knockout={s.knockout || undefined}
+                    data-muted={s.muted || undefined}
                     style={{ "--a": Math.sqrt(s.aspect) } as React.CSSProperties}
                   >
                     <img src={s.logo} alt={s.mark ? "" : s.name} />
