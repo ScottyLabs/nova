@@ -206,10 +206,11 @@
     left: calc(84 * var(--p));
     top: calc(var(--y0) + 310 * var(--p));
   }
-  /* the orbit NOVA, letters 760 wide so the ring (≈1.44×) fits the screen,
-     centred where the poster's mark sits */
+  /* the orbit NOVA, letters 760 wide so the ring (1022) fits the screen.
+     The ring sits 17 left of the letters' centre, so the letters go at 198
+     to put the whole lockup dead centre (561) */
   .mark {
-    left: calc(228 * var(--p));
+    left: calc(198 * var(--p));
     top: calc(var(--y0) + 490 * var(--p));
     width: calc(760 * var(--p));
   }
@@ -244,7 +245,7 @@
   /* art, as on the poster: the star fills the top left, lilac at both edges */
   /* star centred on the mark the same way (offsets scaled with it) */
   .star {
-    left: calc(-74 * var(--p));
+    left: calc(-104 * var(--p));
     top: calc(var(--y0) + -27.5 * var(--p));
     width: calc(1300 * var(--p));
   }

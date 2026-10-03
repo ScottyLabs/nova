@@ -45,7 +45,7 @@
   .slot > * {
     grid-column: 1 / -1;
   }
-  .detail {
+  .slot .detail {
     width: auto;
     min-width: 0;
     text-align: center;
