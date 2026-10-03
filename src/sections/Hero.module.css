@@ -24,6 +24,47 @@
   position: absolute;
   margin: 0;
 }
+/* all the art (gradient, star, lilac shapes) in one layer, same box as the
+   hero, so it can come in as one */
+.art {
+  position: absolute;
+  inset: 0;
+  transition:
+    opacity 1.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 1.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hero:not([data-intro]) .art {
+  opacity: 0;
+  filter: blur(18px);
+  scale: 1.04;
+}
+/* type follows the art. `filter: opacity()` rather than `opacity`, which the
+   scroll-out animation already drives */
+.hero > p,
+.mark {
+  transition: filter 0.9s ease;
+}
+.hero:not([data-intro]) > p,
+.hero:not([data-intro]) .mark {
+  filter: opacity(0) blur(4px);
+}
+.hero[data-intro] .mark {
+  transition-delay: 0.15s;
+}
+.hero[data-intro] .presented,
+.hero[data-intro] .tagline {
+  transition-delay: 0.35s;
+}
+.hero[data-intro] .about {
+  transition-delay: 0.5s;
+}
+.hero[data-intro] .sub {
+  transition-delay: 0.65s;
+}
+.hero[data-intro] .register {
+  transition-delay: 0.85s;
+}
 /* the cover's star (PNG export, 1962×2074 at 1×), scaled to 85% around
    its Figma centre (1103.7, 756.5) */
 .star {
@@ -36,10 +77,6 @@
   transition: opacity 0.6s ease;
   &:hover {
     opacity: 1;
-  }
-  /* hidden until the PNG has arrived, then fades in */
-  &:not([data-loaded]) {
-    opacity: 0;
   }
 }
 /* lilac clusters: node box at its origin, Figma's relativeTransform, and the
