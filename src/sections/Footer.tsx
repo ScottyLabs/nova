@@ -1,6 +1,7 @@
 import footerStar from "../assets/cover/footer-star.png";
 import swoosh from "../assets/cover/nova-swoosh-footer.svg";
 import scottylabs from "../assets/cover/scottylabs.svg";
+import { EVENT_DATE } from "./Hero";
 import css from "./Footer.module.css";
 
 /** Bottom of the cover (300:144, y ≥ 2900): blue glow, static star, cropped swoosh. */
@@ -15,6 +16,7 @@ export function Footer() {
       <div className={css["swoosh"]}>
         <img src={swoosh} alt="NOVA" />
       </div>
+      <p className={css["date"]}>{EVENT_DATE}</p>
       <div className={css["credit"]}>
         <img src={scottylabs} alt="" />
         <p>

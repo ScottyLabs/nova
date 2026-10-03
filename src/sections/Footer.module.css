@@ -65,10 +65,20 @@
     max-width: none;
   }
 }
-.credit {
-  /* lines up with the hero's description column ("Nova is a…", x 1500) */
+/* the date sits in the hero's description column ("Nova is a…", x 1500),
+   on the credit's baseline */
+.date {
   left: calc(1500 * var(--f));
-  bottom: calc(57 * var(--f));
+  bottom: calc(32 * var(--f));
+  font-family: var(--font-mono);
+  font-size: max(12px, calc(22 * var(--u)));
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+.credit {
+  /* bottom-right corner */
+  right: calc(39 * var(--f));
+  bottom: calc(32 * var(--f));
   display: flex;
   align-items: center;
   /* same size as the tagline (.mono-small), logo scaled to match */
@@ -103,6 +113,10 @@
     left: -40px;
     width: 420px;
     height: 170px;
+  }
+  .date {
+    left: 20px;
+    bottom: 20px;
   }
   .credit {
     left: auto;
