@@ -18,7 +18,7 @@ export function Footer() {
       <div className={css["credit"]}>
         <img src={scottylabs} alt="" />
         <p>
-          With &lt;3,
+          With <span className={css["heart"]}>&lt;3,</span>
           <br />
           Scottylabs
         </p>

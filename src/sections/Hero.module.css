@@ -74,7 +74,8 @@
   }
 }
 .presented {
-  left: calc(637 * var(--u));
+  /* shares the wordmark's left edge, like _The */
+  left: var(--mark-x);
   top: calc(83 * var(--u));
   width: 8.2em;
 }

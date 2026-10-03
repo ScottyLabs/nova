@@ -1,4 +1,5 @@
 import { CoverArt } from "../components/CoverArt";
+import { ProgressiveBlur } from "../components/ProgressiveBlur";
 import heroStar from "../assets/cover/hero-star.png";
 import pinkLeft from "../assets/cover/pink-left.svg";
 import pinkRight from "../assets/cover/pink-right.svg";
@@ -15,12 +16,13 @@ export function Hero() {
       <CoverArt />
       {/* cover star "Union (Stroke)" 293:1146, at its render bounds */}
       <img className={css["star"]} src={heroStar} alt="" />
-      {/* lilac clusters 328:1345 (left edge) and 328:1349 (top right) */}
+      {/* lilac clusters 328:1345 (left edge) and 328:1349 (top right),
+          each with Figma's progressive blur, in the node's own frame */}
       <div className={css["pink"]} data-pink="left" aria-hidden>
-        <img src={pinkLeft} alt="" />
+        <ProgressiveBlur src={pinkLeft} angle={162} from={0} to={75} blur="calc(10 * var(--u))" />
       </div>
       <div className={css["pink"]} data-pink="right" aria-hidden>
-        <img src={pinkRight} alt="" />
+        <ProgressiveBlur src={pinkRight} angle={178} from={50} to={97} blur="calc(25 * var(--u))" />
       </div>
       <p className={`mono-small ${css["presented"]}`}>
         <Scramble text="Presented by Scottylabs" delay={200} />

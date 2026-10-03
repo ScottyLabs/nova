@@ -30,15 +30,15 @@
   translate: calc(var(--px, 0) * -30px) 0;
 }
 /* "Union (Stroke)" 293:1319 with Figma's relativeTransform (rotation +
-   slight skew), scaled to 85% around its centre (1846.5, 858.5), 50% */
+   slight skew), scaled to 65% around its centre (1846.5, 858.5) */
 .star {
-  left: calc(681.6 * var(--f));
-  top: calc(456.9 * var(--f));
-  width: calc(2070.86 * var(--f));
-  height: calc(1422.74 * var(--f));
+  left: calc(955.7 * var(--f));
+  top: calc(551.4 * var(--f));
+  width: calc(1583.6 * var(--f));
+  height: calc(1088 * var(--f));
   transform-origin: 0 0;
   transform: matrix(0.96026, -0.27912, 0.23979, 0.97082, 0, 0);
-  opacity: 0.5;
+  opacity: 0.75;
   img {
     position: absolute;
     inset: -4.28% -2.94%;
@@ -79,11 +79,15 @@
     height: auto;
   }
   p {
-    font-family: var(--font-label);
+    font-family: "Satoshi", var(--font-label);
     font-size: var(--size);
     line-height: 1;
     letter-spacing: -0.04em;
   }
+}
+/* "<3," stays in Inter; the words around it are Satoshi */
+.heart {
+  font-family: var(--font-label);
 }
 @media (max-width: 700px) {
   .footer {
