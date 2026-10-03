@@ -140,3 +140,32 @@
     color: inherit;
   }
 }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .footer {
+      view-timeline: --footer block;
+    }
+    .swoosh {
+      animation: rise linear both;
+      animation-timeline: --footer;
+      animation-range: entry 20% entry 100%;
+    }
+    .star {
+      animation: star-drift linear both;
+      animation-timeline: --footer;
+      animation-range: entry 0% exit 0%;
+    }
+  }
+}
+@keyframes rise {
+  from {
+    translate: 0 40%;
+    opacity: 0;
+  }
+}
+@keyframes star-drift {
+  from {
+    translate: 0 12%;
+  }
+}

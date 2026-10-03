@@ -66,11 +66,11 @@ export function Sponsors() {
     <section className={css["sponsors"]}>
       <div className="clamp-width">
         <div className={css["head"]} data-reveal>
-          <h2 className="section-title">Sponsors</h2>
+          <h2 className="section-title" data-reveal="wipe">Sponsors</h2>
         </div>
         {TIERS.map((tier) => (
           <div key={tier.name} className={css["tier"]}>
-            <p className={`label ${css["tierName"]}`}>{tier.name}</p>
+            <p className={`label ${css["tierName"]}`} data-reveal>{tier.name}</p>
             <ul className={css["grid"]} data-tier={tier.name}>
               {tier.sponsors.map((s, i) => (
                 <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 4) * 60}ms` }}>

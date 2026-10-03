@@ -222,3 +222,50 @@
     height: 32vw;
   }
 }
+
+/* Scroll-out parallax: as the hero leaves the viewport its layers drift up
+   at different speeds and fade, so it peels away in depth. CSS scroll-driven
+   animations (compositor-only); browsers without them just scroll. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      view-timeline: --hero block;
+    }
+    .hero > p,
+    .mark {
+      animation: drift-front linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .star {
+      animation: drift-star linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .pink {
+      animation: drift-back linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes drift-front {
+  to {
+    transform: translateY(-18vh);
+    opacity: 0;
+  }
+}
+/* .star uses `translate` for its phone centring, .pink uses `transform`
+   for its Figma matrix — so each drifts on the property the other leaves free */
+@keyframes drift-star {
+  to {
+    transform: translateY(-6vh);
+    opacity: 0.25;
+  }
+}
+@keyframes drift-back {
+  to {
+    translate: 0 -6vh;
+    opacity: 0.25;
+  }
+}
