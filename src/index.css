@@ -128,7 +128,7 @@ img {
 }
 
 /* Hovering NOVA: the page drops to black — gradient, stars and art fade out,
-   every bit of type turns white. */
+   type turns grey. */
 body,
 .page *:not([data-reveal]) {
   transition-property: color, background-color, border-color, opacity;
@@ -137,8 +137,9 @@ body,
 }
 :root[data-void] {
   --mist: #000;
-  --ink: #fff;
-  --graphite: #fff;
+  /* type goes grey; only "_The Gen-AI_ _Hackathon" stays white */
+  --ink: #8c8c8c;
+  --graphite: #8c8c8c;
 }
 :root[data-void] [data-void-hide] {
   opacity: 0 !important;

@@ -140,7 +140,7 @@
 
 :global(:root[data-void]) .register {
   background: transparent;
-  border-color: var(--white);
+  border-color: currentColor;
 }
 
 /* Phones: same pieces, stacked in flow over the field. */
