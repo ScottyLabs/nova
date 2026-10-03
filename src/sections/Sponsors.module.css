@@ -117,6 +117,13 @@ li:hover .logo[data-muted] .ink {
 :global(:root[data-void]) .grid li {
   background: rgb(255 255 255 / 0.92);
 }
+/* Partner: 5 per row (9 logos → 5 + a centred 4) */
+.grid[data-tier="Partner"] {
+  --cols: 5;
+  @media (max-width: 700px) {
+    --cols: 2;
+  }
+}
 /* Premier cards: solid white */
 .grid[data-tier="Premier"] li {
   background: #fff;
