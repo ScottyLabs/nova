@@ -24,13 +24,13 @@
   position: absolute;
   margin: 0;
 }
-/* the cover's star (PNG export, 1962×2074 at 1×): its unclipped bottom
-   sits at y 1793.6, so the top bleeds 280 above the page */
+/* the cover's star (PNG export, 1962×2074 at 1×), scaled to 85% around
+   its Figma centre (1103.7, 756.5) */
 .star {
   position: absolute;
-  left: calc(122.7 * var(--u));
-  top: calc(-280.4 * var(--u));
-  width: calc(1961.9 * var(--u));
+  left: calc(269.9 * var(--u));
+  top: calc(-124.9 * var(--u));
+  width: calc(1667.6 * var(--u));
   height: auto;
   opacity: 0.7;
   transition: opacity 0.45s ease;
