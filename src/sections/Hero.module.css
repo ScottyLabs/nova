@@ -196,28 +196,27 @@
    its grid in poster units (--p = 1/1122 of the screen width). Type keeps a
    readable floor, so widths are in em where text wraps. */
 @media (max-width: 700px) {
-  /* the hero fills the screen exactly; the poster composition sits
-     centred in it (--y0 is the spare space above it) */
+  /* the hero fills the screen; NOVA sits at its exact centre and every other
+     piece is placed relative to it (poster y minus NOVA's centre, 581.5) */
   .hero {
     --p: calc(100vw / 1122);
-    --y0: max(0px, (100svh - 1600 * var(--p)) / 2);
-    height: max(100svh, calc(1600 * var(--p)));
+    height: max(100svh, calc(1760 * var(--p)));
     min-height: 0;
   }
   .presented {
     left: calc(562 * var(--p));
-    top: calc(var(--y0) + 74 * var(--p));
+    top: calc(50% + -507.5 * var(--p));
   }
   .tagline {
     left: calc(84 * var(--p));
-    top: calc(var(--y0) + 310 * var(--p));
+    top: calc(50% + -271.5 * var(--p));
   }
   /* the orbit NOVA, letters 760 wide so the ring (1022) fits the screen.
      The ring sits 17 left of the letters' centre, so the letters go at 198
      to put the whole lockup dead centre (561) */
   .mark {
     left: calc(198 * var(--p));
-    top: calc(var(--y0) + 490 * var(--p));
+    top: calc(50% + -91.5 * var(--p));
     width: calc(760 * var(--p));
   }
   .sub {
@@ -225,26 +224,26 @@
   }
   .sub[data-word="hackathon"] {
     left: calc(755 * var(--p));
-    top: calc(var(--y0) + 756 * var(--p));
+    top: calc(50% + 174.5 * var(--p));
   }
   .sub[data-word="the"] {
     left: calc(161 * var(--p));
-    top: calc(var(--y0) + 851 * var(--p));
+    top: calc(50% + 269.5 * var(--p));
   }
   .sub[data-word="genai"] {
     left: calc(463 * var(--p));
-    top: calc(var(--y0) + 851 * var(--p));
+    top: calc(50% + 269.5 * var(--p));
     > span:first-child {
       margin-left: calc(64 * var(--p));
     }
   }
   .about {
     left: calc(147 * var(--p));
-    top: calc(var(--y0) + 989 * var(--p));
+    top: calc(50% + 467.5 * var(--p));
     width: max(60vw, calc(410 * var(--p)));
   }
   .register {
-    top: calc(var(--y0) + 1280 * var(--p));
+    top: calc(50% + 818.5 * var(--p));
     font-size: max(12px, calc(30 * var(--p)));
     padding: 0.4em 0.5em;
   }
@@ -252,18 +251,18 @@
   /* star centred on the mark the same way (offsets scaled with it) */
   .star {
     left: calc(-104 * var(--p));
-    top: calc(var(--y0) + -27.5 * var(--p));
+    top: calc(50% + -609 * var(--p));
     width: calc(1300 * var(--p));
   }
   .pink[data-pink="left"] {
     left: calc(-40 * var(--p));
-    top: calc(var(--y0) + 240 * var(--p));
+    top: calc(50% + -341.5 * var(--p));
     width: calc(260 * var(--p));
     height: calc(330 * var(--p));
   }
   .pink[data-pink="right"] {
     left: calc(1250 * var(--p));
-    top: calc(var(--y0) + -60 * var(--p));
+    top: calc(50% + -641.5 * var(--p));
     width: calc(560 * var(--p));
     height: calc(450 * var(--p));
   }
