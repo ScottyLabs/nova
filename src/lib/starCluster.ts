@@ -7,7 +7,6 @@ const STAR: Pt[] = [
   [183.279, 106.755], [326.879, 288.145], [219.179, 106.755], [348.608, 117.148],
   [243.742, 79.358], [393.011, 0],
 ];
-const STAR_CENTER: Pt = [196.5, 144];
 
 /** Each pattern star is three copies of STAR (Figma unions 274:971 / 274:961);
     matrices are each copy's relativeTransform (one is mirrored). */
@@ -51,7 +50,8 @@ const mul = (m: Mat, n: Mat): Mat => [
 ];
 const apply = (m: Mat, [x, y]: Pt): Pt => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 
-/** STAR with every corner rounded (quadratic, tangent capped at half an edge). */
+/** STAR with small rounded corners (quadratic; tangent capped so only the
+    tips soften, like the Figma union). */
 function roundedStar(radius: number) {
   const n = STAR.length;
   let d = "";
@@ -60,7 +60,8 @@ function roundedStar(radius: number) {
     const v1: Pt = [p[0] - c[0], p[1] - c[1]], v2: Pt = [q[0] - c[0], q[1] - c[1]];
     const l1 = Math.hypot(...v1), l2 = Math.hypot(...v2);
     const half = Math.acos(Math.min(1, Math.max(-1, (v1[0] * v2[0] + v1[1] * v2[1]) / (l1 * l2)))) / 2;
-    const t = Math.min(radius / Math.tan(half || 1e-6), l1 / 2, l2 / 2);
+    // cap the tangent so shallow corners stay crisp instead of swooping
+    const t = Math.min(radius / Math.tan(half || 1e-6), radius * 1.5, l1 / 2, l2 / 2);
     const f = (v: number) => v.toFixed(2);
     d += `${i ? "L" : "M"}${f(c[0] + (v1[0] / l1) * t)} ${f(c[1] + (v1[1] / l1) * t)}`;
     d += `Q${f(c[0])} ${f(c[1])} ${f(c[0] + (v2[0] / l2) * t)} ${f(c[1] + (v2[1] / l2) * t)}`;
@@ -71,25 +72,20 @@ function roundedStar(radius: number) {
 export interface IStarPiece {
   /** final placement of this copy, in cluster coordinates (origin top-left) */
   matrix: Mat;
-  /** where it swells from: the copy's own centre */
-  origin: Pt;
-  /** which pattern star it belongs to, and its order within it */
-  part: number;
-  index: number;
 }
 
 /** Every star copy in the cluster, plus the cluster's bounds. */
 export function buildCluster() {
   const pieces: IStarPiece[] = [];
-  PARTS.forEach((part, pi) => {
+  PARTS.forEach((part) => {
     const u = UNIONS[part.shape];
     const r = (part.rot * Math.PI) / 180;
     const cos = Math.cos(r) * part.scale, sin = Math.sin(r) * part.scale;
     const place: Mat = [cos, sin, -sin, cos, part.x, part.y];
     const centre: Mat = [1, 0, 0, 1, -u.w / 2, -u.h / 2];
-    u.copies.forEach((copy, ci) => {
+    u.copies.forEach((copy) => {
       const m = mul(place, mul(centre, copy));
-      pieces.push({ matrix: m, origin: apply(m, STAR_CENTER), part: pi, index: ci });
+      pieces.push({ matrix: m });
     });
   });
   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -99,20 +95,11 @@ export function buildCluster() {
       minX = Math.min(minX, x); minY = Math.min(minY, y);
       maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
     }
-  // breathing room so stars swelling on hover aren't cropped
+  // breathing room so the progressive blur isn't cropped at the box edge
   const pad = 0.18 * Math.max(maxX - minX, maxY - minY);
   minX -= pad; minY -= pad; maxX += pad; maxY += pad;
   for (const p of pieces) {
     p.matrix = [p.matrix[0], p.matrix[1], p.matrix[2], p.matrix[3], p.matrix[4] - minX, p.matrix[5] - minY];
-    p.origin = [p.origin[0] - minX, p.origin[1] - minY];
   }
-  // each star group's centre (mean of its copies' centres), for the hover lean
-  const partCentres: Pt[] = PARTS.map((_, pi) => {
-    const own = pieces.filter((p) => p.part === pi);
-    return [
-      own.reduce((s, p) => s + p.origin[0], 0) / own.length,
-      own.reduce((s, p) => s + p.origin[1], 0) / own.length,
-    ];
-  });
-  return { pieces, partCentres, pad, d: roundedStar(9), w: maxX - minX, h: maxY - minY };
+  return { pieces, pad, d: roundedStar(4), w: maxX - minX, h: maxY - minY };
 }

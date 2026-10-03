@@ -17,6 +17,7 @@ export function Hero() {
         centerY="calc(var(--mark-y) + var(--mark-h) / 2)"
         width={1700}
         opacity={0.7}
+        hoverOpacity={1}
       />
       <p className={`mono-small ${css["presented"]}`}>
         <Scramble text="Presented by Scottylabs" delay={200} />

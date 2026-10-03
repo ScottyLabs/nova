@@ -1,4 +1,4 @@
-import starPattern from "../assets/cover/star-pattern.png";
+import footerStar from "../assets/cover/footer-star.png";
 import swoosh from "../assets/cover/nova-swoosh-footer.svg";
 import scottylabs from "../assets/cover/scottylabs.svg";
 import css from "./Footer.module.css";
@@ -8,7 +8,9 @@ export function Footer() {
   return (
     <footer className={css["footer"]}>
       <div className={css["glow"]} data-parallax aria-hidden />
-      <img className={css["star"]} src={starPattern} alt="" />
+      <div className={css["star"]} aria-hidden>
+        <img src={footerStar} alt="" />
+      </div>
       <p className={`mono-small ${css["tagline"]}`}>CMU&rsquo;s first GenAI playground hackathon</p>
       <div className={css["swoosh"]}>
         <img src={swoosh} alt="NOVA" />

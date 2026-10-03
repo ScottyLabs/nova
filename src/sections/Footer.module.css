@@ -28,13 +28,20 @@
   );
   translate: calc(var(--px, 0) * -30px) 0;
 }
-/* the star pattern, static here (the hero's builds itself) */
+/* "Union (Stroke)" 293:1319 at its cover position (y from 2900), 50% */
 .star {
-  left: calc(1000 * var(--f));
-  top: calc(-260 * var(--f));
-  width: calc(1500 * var(--f));
-  height: auto;
+  left: calc(476 * var(--f));
+  top: calc(56 * var(--f));
+  width: calc(2740.85 * var(--f));
+  height: calc(2305 * var(--f));
   opacity: 0.5;
+  img {
+    position: absolute;
+    inset: -4.28% -2.94%;
+    width: 105.88%;
+    height: 108.56%;
+    max-width: none;
+  }
 }
 .tagline {
   left: calc(40 * var(--f));

@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { buildCluster } from "../lib/starCluster";
 import css from "./StarPattern.module.css";
 
@@ -8,14 +8,6 @@ import css from "./StarPattern.module.css";
 const BANDS = [56, 63, 70, 77];
 const MAX_BLUR = 71.6 / 1807 / 1.36; // fraction of the box width (box = cluster + 18% padding each side)
 
-// Hover: star groups near the cursor swell and lean away from it, each
-// spiky copy a little more than its group, then spring back when it leaves.
-const REACH = 380; // cluster units: how far the cursor's influence spreads
-const PUSH = 70; // max drift away from the cursor, cluster units
-const SWELL = 0.1; // max extra scale
-const EASE = 0.12; // spring step per frame
-
-
 interface IStarPattern {
   /** where the cluster's centre sits (any CSS length expression) */
   centerX: string;
@@ -24,99 +16,40 @@ interface IStarPattern {
   width: number;
   unit?: "--u" | "--f";
   opacity?: number;
+  /** opacity while hovered */
+  hoverOpacity?: number;
 }
 
 /** The cover's star pattern as one glassy, noisy, progressively blurred
-    union of stars. Hovering it makes the stars near the cursor swell and
-    lean away, springing back when the cursor leaves. */
-export function StarPattern({ centerX, centerY, width, unit = "--u", opacity = 1 }: IStarPattern) {
+    union of stars. It never moves; hovering it brings it up in opacity. */
+export function StarPattern({
+  centerX,
+  centerY,
+  width,
+  unit = "--u",
+  opacity = 1,
+  hoverOpacity = 1,
+}: IStarPattern) {
   const id = useId().replace(/:/g, "");
   const el = useRef<HTMLDivElement>(null);
-  const { pieces, partCentres, pad, d, w, h } = useMemo(buildCluster, []);
+  const { pieces, pad, d, w, h } = useMemo(buildCluster, []);
+  const [hot, setHot] = useState(false);
+  const alpha = hot ? hoverOpacity : opacity;
   // `width` is the cluster's width; the box adds padding so swelling stars aren't cropped
   const perUnit = width / (w - 2 * pad);
   const box = { width: w * perUnit, height: h * perUnit };
 
+  // place every star copy once (they start collapsed in markup, see below)
   useEffect(() => {
     const node = el.current!;
-    // every <path> for piece i, in clip (bounding-box units) and in user units
-    const boxPaths = pieces.map((_, i) => node.querySelectorAll<SVGPathElement>(`[data-box="${i}"]`));
-    const userPaths = pieces.map((_, i) => node.querySelectorAll<SVGPathElement>(`[data-user="${i}"]`));
-    const cur = pieces.map(() => ({ x: 0, y: 0, s: 1 }));
-    const target = pieces.map(() => ({ x: 0, y: 0, s: 1 }));
-
-    const render = () => {
-      pieces.forEach((p, i) => {
-        const c = cur[i];
-        const [ox, oy] = p.origin;
-        const t =
-          `translate(${c.x} ${c.y}) translate(${ox} ${oy}) scale(${c.s}) translate(${-ox} ${-oy}) ` +
-          `matrix(${p.matrix.join(" ")})`;
-        boxPaths[i].forEach((path) => path.setAttribute("transform", `scale(${1 / w} ${1 / h}) ${t}`));
-        userPaths[i].forEach((path) => path.setAttribute("transform", t));
-      });
-    };
-    render();
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let raf = 0;
-    const tick = () => {
-      let moving = false;
-      cur.forEach((c, i) => {
-        const g = target[i];
-        c.x += (g.x - c.x) * EASE;
-        c.y += (g.y - c.y) * EASE;
-        c.s += (g.s - c.s) * EASE;
-        if (Math.abs(g.x - c.x) + Math.abs(g.y - c.y) + Math.abs(g.s - c.s) * 100 > 0.05) moving = true;
-      });
-      render();
-      raf = moving ? requestAnimationFrame(tick) : 0;
-    };
-    const kick = () => {
-      if (!raf) raf = requestAnimationFrame(tick);
-    };
-
-    const onMove = (e: PointerEvent) => {
-      const b = node.getBoundingClientRect();
-      const inside = e.clientX >= b.left && e.clientX <= b.right && e.clientY >= b.top && e.clientY <= b.bottom;
-      // pointer in cluster units
-      const mx = ((e.clientX - b.left) / b.width) * w;
-      const my = ((e.clientY - b.top) / b.height) * h;
-      pieces.forEach((p, i) => {
-        const g = target[i];
-        if (!inside) {
-          g.x = g.y = 0;
-          g.s = 1;
-          return;
-        }
-        // the group leans as one; each copy adds a little of its own
-        const [gx, gy] = partCentres[p.part];
-        const [ox, oy] = p.origin;
-        const ax = (gx + ox) / 2 - mx;
-        const ay = (gy + oy) / 2 - my;
-        const dist = Math.hypot(ax, ay) || 1;
-        const f = Math.max(0, 1 - dist / REACH) ** 2;
-        g.x = (ax / dist) * PUSH * f;
-        g.y = (ay / dist) * PUSH * f;
-        g.s = 1 + SWELL * f;
-      });
-      kick();
-    };
-    const onLeave = () => {
-      target.forEach((g) => {
-        g.x = g.y = 0;
-        g.s = 1;
-      });
-      kick();
-    };
-    addEventListener("pointermove", onMove, { passive: true });
-    document.documentElement.addEventListener("pointerleave", onLeave);
-    return () => {
-      removeEventListener("pointermove", onMove);
-      document.documentElement.removeEventListener("pointerleave", onLeave);
-      cancelAnimationFrame(raf);
-    };
-  }, [pieces, partCentres, w, h]);
+    pieces.forEach((p, i) => {
+      const m = `matrix(${p.matrix.join(" ")})`;
+      node
+        .querySelectorAll(`[data-box="${i}"]`)
+        .forEach((path) => path.setAttribute("transform", `scale(${1 / w} ${1 / h}) ${m}`));
+      node.querySelectorAll(`[data-user="${i}"]`).forEach((path) => path.setAttribute("transform", m));
+    });
+  }, [pieces, w, h]);
 
   const clip = { clipPath: `url(#clip-${id})` };
   const band = (i: number) => {
@@ -179,8 +112,8 @@ export function StarPattern({ centerX, centerY, width, unit = "--u", opacity = 1
 
       {/* sharp: true glass over whatever is behind. Mask and opacity sit on
           the glass itself — on an ancestor they'd cut off its backdrop. */}
-      <div className={`${css["fill"]} ${css["glass"]} ${css["noise"]}`} style={{ ...clip, ...band(0), opacity }} />
-      <div className={css["layer"]} style={{ ...band(0), opacity }}>
+      <div className={`${css["fill"]} ${css["glass"]} ${css["noise"]}`} style={{ ...clip, ...band(0), opacity: alpha }} />
+      <div className={css["layer"]} style={{ ...band(0), opacity: alpha }}>
         {edge}
       </div>
       {/* progressively blurred bands */}
@@ -190,7 +123,7 @@ export function StarPattern({ centerX, centerY, width, unit = "--u", opacity = 1
           className={css["layer"]}
           style={{
             ...band(k + 1),
-            opacity,
+            opacity: alpha,
             filter: `blur(calc(var(--w) * ${(MAX_BLUR * (k + 1)) / (BANDS.length - 1)}))`,
           }}
         >
@@ -198,6 +131,8 @@ export function StarPattern({ centerX, centerY, width, unit = "--u", opacity = 1
           {edge}
         </div>
       ))}
+      {/* hover target, shaped like the union */}
+      <div className={css["hit"]} style={clip} onPointerEnter={() => setHot(true)} onPointerLeave={() => setHot(false)} />
     </div>
   );
 }
