@@ -3,7 +3,9 @@
   /* NOVA sits dead centre of the first viewport; the lockup hangs off it */
   --mark-w: calc(1015 * var(--u));
   --mark-h: calc(1015 * 196.07 / 814.84 * var(--u));
-  --mark-x: calc(50% - var(--mark-w) / 2);
+  /* the orbit ring sits 22.9 left of the letters' centre: nudge the letters
+     right by that so the whole lockup is centred */
+  --mark-x: calc(50% - var(--mark-w) / 2 + 22.9 * var(--u));
   /* right-hand column shared by the description and _Hackathon */
   --col-x: calc(1500 * var(--u));
   /* centred in the first viewport, but lifted when needed so the
