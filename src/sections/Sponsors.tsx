@@ -26,13 +26,11 @@ interface ISponsor {
   aspect: number;
 }
 
-// Logo size follows the tier: Premier ($10k+) large, Partner ($5k+, plus
-// Jane Street) smaller. Within a tier every logo gets the same visual AREA — a long
-// wordmark is wider but shorter than a compact mark — so none reads bigger.
-const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
+// Every logo gets the same visual AREA — a long wordmark is wider but shorter
+// than a compact mark — so none reads bigger than another.
+const TIERS: { name: string; sponsors: ISponsor[] }[] = [
   {
     name: "Premier",
-    size: "lg",
     sponsors: [
       { name: "Mechanize", logo: mechanize, mark: true, aspect: 3.6 },
       { name: "Salesforce", logo: salesforce, aspect: 1.369 },
@@ -44,10 +42,8 @@ const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
   },
   {
     name: "Partner",
-    size: "md",
     sponsors: [
       { name: "Perplexity", logo: perplexity, aspect: 3.778 },
-      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
       { name: "Recruit Holdings", logo: recruit, aspect: 3.617 },
       { name: "Anduril", logo: anduril, aspect: 4.828 },
       { name: "Runpod", logo: runpod, light: true, aspect: 4.151 },
@@ -55,6 +51,7 @@ const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
       { name: "D. E. Shaw", logo: deshaw, aspect: 4.101 },
       { name: "Citadel", logo: citadel, aspect: 7.034 },
       { name: "Optiver", logo: optiver, aspect: 3.417 },
+      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
     ],
   },
 ];
@@ -69,7 +66,7 @@ export function Sponsors() {
         {TIERS.map((tier) => (
           <div key={tier.name} className={css["tier"]}>
             <p className={`label ${css["tierName"]}`}>{tier.name}</p>
-            <ul className={css["grid"]} data-size={tier.size}>
+            <ul className={css["grid"]}>
               {tier.sponsors.map((s, i) => (
                 <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 4) * 60}ms` }}>
                   <span

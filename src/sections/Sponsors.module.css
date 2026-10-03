@@ -28,23 +28,14 @@
     border-left: 1px solid rgb(43 43 43 / 0.15);
   }
 }
-/* tier → logo size */
-.grid[data-size="lg"] {
+/* one size for every logo, whatever the tier */
+.grid {
   grid-template-columns: repeat(4, 1fr);
   li {
     aspect-ratio: 16 / 9;
-    --k: clamp(40px, 5vw, 76px);
+    --k: clamp(32px, 4vw, 60px);
   }
-}
-.grid[data-size="md"] {
-  grid-template-columns: repeat(4, 1fr);
-  li {
-    aspect-ratio: 2 / 1;
-    --k: clamp(28px, 3.3vw, 50px);
-  }
-}
-@media (max-width: 700px) {
-  .grid[data-size] {
+  @media (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
