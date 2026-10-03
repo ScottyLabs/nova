@@ -53,9 +53,8 @@ export function Hero() {
       </p>
       <p className={`mono-small ${css["about"]}`}>
         Nova is a hackathon designed for you to create and innovate in a
-        playground of generative technology. With tools like GPT, MidJourney,
-        and Eleven Labs, participants can freely experiment and bring their
-        ideas to life.
+        playground of AI technology. Participants can freely
+        experiment and bring their ideas to life.
       </p>
 
       <h1 className={css["mark"]}>
