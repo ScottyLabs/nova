@@ -29,13 +29,13 @@
   );
   translate: calc(var(--px, 0) * -30px) 0;
 }
-/* "Union (Stroke)" 293:1319: node box at its origin (476, 386), Figma's
-   relativeTransform (rotation + slight skew), 50% */
+/* "Union (Stroke)" 293:1319 with Figma's relativeTransform (rotation +
+   slight skew), scaled to 85% around its centre (1846.5, 858.5), 50% */
 .star {
-  left: calc(476 * var(--f));
-  top: calc(386 * var(--f));
-  width: calc(2436.31 * var(--f));
-  height: calc(1673.81 * var(--f));
+  left: calc(681.6 * var(--f));
+  top: calc(456.9 * var(--f));
+  width: calc(2070.86 * var(--f));
+  height: calc(1422.74 * var(--f));
   transform-origin: 0 0;
   transform: matrix(0.96026, -0.27912, 0.23979, 0.97082, 0, 0);
   opacity: 0.5;
