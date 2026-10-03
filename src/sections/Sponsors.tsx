@@ -1,25 +1,12 @@
 import css from "./Sponsors.module.css";
 
-// 26–27 sponsors. Set as type for now; swap a name for a logo once the
-// files are in.
-const SPONSORS = [
-  "Salesforce",
-  "Perplexity",
-  "Recruit Holdings",
-  "Anduril",
-  "Runpod",
-  "DoorDash",
-  "GM",
-  "Mechanize",
-  "Accenture",
-  "D. E. Shaw",
-  "Citadel",
-  "Optiver",
-  "HRT",
-  "Jane Street",
-  "VISA",
-  "Jump Trading",
-];
+const sponsorImages = Object.values(
+  import.meta.glob<string>("../assets/sponsors/*", {
+    eager: true,
+    query: "?url",
+    import: "default",
+  })
+);
 
 export function Sponsors() {
   return (
@@ -29,9 +16,9 @@ export function Sponsors() {
           <h2 className="label">Sponsors</h2>
         </div>
         <ul className={css["grid"]}>
-          {SPONSORS.map((name, i) => (
-            <li key={name} data-reveal style={{ transitionDelay: `${(i % 4) * 60}ms` }}>
-              <span className="subhead">{name}</span>
+          {sponsorImages.map((src, i) => (
+            <li key={src} data-reveal style={{ transitionDelay: `${(i % 6) * 60}ms` }}>
+              <img src={src} alt="" />
             </li>
           ))}
         </ul>
