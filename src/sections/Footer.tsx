@@ -25,12 +25,9 @@ export function Footer() {
       <div className={css["credit"]}>
         <img src={scottylabs} alt="" />
         <p>
-          <Scramble text="With" delay={450} onView />{" "}
-          <span className={css["heart"]}>
-            <Scramble text="<3," delay={550} onView />
-          </span>
+          With <span className={css["heart"]}>&lt;3,</span>
           <br />
-          <Scramble text="Scottylabs" delay={650} onView />
+          Scottylabs
         </p>
       </div>
     </footer>
