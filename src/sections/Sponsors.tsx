@@ -26,15 +26,14 @@ interface ISponsor {
   aspect: number;
 }
 
-// Logo size follows the tier: Jane Street and Premier ($10k+) large, Partner
-// ($5k+) smaller. Within a tier every logo gets the same visual AREA — a long
+// Logo size follows the tier: Premier ($10k+) large, Partner ($5k+, plus
+// Jane Street) smaller. Within a tier every logo gets the same visual AREA — a long
 // wordmark is wider but shorter than a compact mark — so none reads bigger.
 const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
   {
     name: "Premier",
     size: "lg",
     sponsors: [
-      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
       { name: "Mechanize", logo: mechanize, mark: true, aspect: 3.6 },
       { name: "Salesforce", logo: salesforce, aspect: 1.369 },
       { name: "DoorDash", logo: doordash, aspect: 7.221 },
@@ -48,6 +47,7 @@ const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
     size: "md",
     sponsors: [
       { name: "Perplexity", logo: perplexity, aspect: 3.778 },
+      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
       { name: "Recruit Holdings", logo: recruit, aspect: 3.617 },
       { name: "Anduril", logo: anduril, aspect: 4.828 },
       { name: "Runpod", logo: runpod, light: true, aspect: 4.151 },

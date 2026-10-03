@@ -10,4 +10,30 @@
   width: 107.82%;
   max-width: none;
   height: auto;
+  transition: opacity 0.25s ease;
+}
+/* the 3D canvas overscans the letters (see OVERSCAN in metalWordmark.ts) so
+   the spin has room; at rest its letters sit exactly on the flat ones */
+.metal {
+  position: absolute;
+  left: -15%;
+  right: -15%;
+  top: -60%;
+  bottom: -60%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+.wordmark[data-live] {
+  .logo {
+    opacity: 0;
+  }
+  .metal {
+    opacity: 1;
+  }
 }
