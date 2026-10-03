@@ -6,6 +6,9 @@
   /* the orbit ring sits 22.9 left of the letters' centre: nudge the letters
      right by that so the whole lockup is centred */
   --mark-x: calc(50% - var(--mark-w) / 2 + 22.9 * var(--u));
+  /* art scale: follows whichever of width/height is larger (so a tall,
+     narrow window doesn't shrink the art), and runs 15% over the cover */
+  --ua: calc(max(var(--u), 100svh / 1250) * 1.15);
   /* right-hand column shared by the description and _Hackathon */
   --col-x: calc(1500 * var(--u));
   /* centred in the first viewport, but lifted when needed so the
@@ -73,9 +76,9 @@
    the two stay aligned however NOVA moves with the window. */
 .star {
   position: absolute;
-  left: calc(var(--mark-x) + var(--mark-w) / 2 - (41 + 833.8) * var(--u));
-  top: calc(var(--mark-y) + var(--mark-h) / 2 + (100 - 881.4) * var(--u));
-  width: calc(1667.6 * var(--u));
+  left: calc(var(--mark-x) + var(--mark-w) / 2 - (41 + 833.8) * var(--ua));
+  top: calc(var(--mark-y) + var(--mark-h) / 2 + (100 - 881.4) * var(--ua));
+  width: calc(1667.6 * var(--ua));
   height: auto;
   opacity: 0.7;
   transition: opacity 0.6s ease;
@@ -95,10 +98,10 @@
   }
 }
 .pink[data-pink="left"] {
-  left: calc(-70.74 * var(--u));
-  top: calc(129 * var(--u));
-  width: calc(576.21 * var(--u));
-  height: calc(706.87 * var(--u));
+  left: calc(-70.74 * var(--ua));
+  top: calc(129 * var(--ua));
+  width: calc(576.21 * var(--ua));
+  height: calc(706.87 * var(--ua));
   transform: matrix(0.88785, 0.46014, -0.46014, 0.88785, 0, 0);
   img {
     inset: -2.83% -3.47%;
@@ -106,11 +109,12 @@
     height: 105.66%;
   }
 }
+/* anchored to the right edge (it sat 556.9 past it on the cover) */
 .pink[data-pink="right"] {
-  left: calc(2787.88 * var(--u));
-  top: calc(52.09 * var(--u));
-  width: calc(871.13 * var(--u));
-  height: calc(696.42 * var(--u));
+  left: calc(100% + 556.88 * var(--ua));
+  top: calc(52.09 * var(--ua));
+  width: calc(871.13 * var(--ua));
+  height: calc(696.42 * var(--ua));
   transform: matrix(-0.82041, -0.57177, -0.57177, 0.82041, 0, 0);
   img {
     inset: -7.18% -5.74%;
