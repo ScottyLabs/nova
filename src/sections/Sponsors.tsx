@@ -1,26 +1,27 @@
 import css from "./Sponsors.module.css";
-export default function Sponsors() {
-  const sponsorImages = Object.values(
-    import.meta.glob("../assets/sponsors/*", {
-      eager: true,
-      query: "url",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as Record<string, any>
-  ).map((data) => data.default as string);
+
+const sponsorImages = Object.values(
+  import.meta.glob<string>("../assets/sponsors/*", {
+    eager: true,
+    query: "?url",
+    import: "default",
+  })
+);
+
+export function Sponsors() {
   return (
-    <section className={css["sponsors-section"]}>
+    <section className={css["sponsors"]}>
       <div className="clamp-width">
-        <h2 className={css["sponsor-title"]}>Our Sponsors</h2>
-        <div className={css["sponsor-container"]}>
-          {sponsorImages.map((imgUrl) => (
-            <img
-              className={css["sponsor-image"]}
-              src={imgUrl}
-              alt=""
-              key={imgUrl}
-            />
-          ))}
+        <div className={css["head"]} data-reveal>
+          <h2 className="label">Sponsors</h2>
         </div>
+        <ul className={css["grid"]}>
+          {sponsorImages.map((src, i) => (
+            <li key={src} data-reveal style={{ transitionDelay: `${(i % 6) * 60}ms` }}>
+              <img src={src} alt="" />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

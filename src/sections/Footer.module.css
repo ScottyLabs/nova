@@ -1,76 +1,98 @@
-.footer-container {
-  height: 450px;
+/* Artboard units, with y measured from 2900 on the cover. --f never drops
+   below a readable size on phones. */
+.footer {
+  --f: max(var(--u), 0.3px);
   position: relative;
-  background: linear-gradient(
-      180deg,
-      #101c1c 0%,
-      #101c1c 18.73%,
-      #173c46 43.9%,
-      #226981 59.42%,
-      #33b2e2 74.95%,
-      #f1ede6 86.12%,
-      #ff8945 100.25%,
-      #14478f 100.39%
-    ),
-    rgba(0, 0, 0, 0.2);
-  .left-section {
+  height: calc(733 * var(--f));
+  /* clip the sides and the cropped swoosh at the bottom, but let the glow
+     rise freely into the page above */
+  clip-path: inset(-100vh 0 0 0);
+  color: var(--white);
+  > * {
     position: absolute;
-    top: 190px;
-    left: 60px;
-    img {
-      height: 80px;
-      display: block;
-      @media screen and (max-width: 1000px) {
-        height: 60px;
-      }
-    }
-    span {
-      display: block;
-      margin-top: 15px;
-      font-size: 1.2rem;
-      color: #ffffff;
-      font-weight: 500;
-      font-family: "Poppins";
-    }
-  }
-  .lines--large {
-    position: absolute;
-    top: 140px;
-    right: 0px;
-    width: 600px;
-    opacity: 0.8;
-  }
-  .lines--small {
-    display: none;
-    position: absolute;
-    top: 100px;
-    right: 0px;
-    height: 100px;
-  }
-  @media screen and (max-width: 1000px) {
-    .lines--large {
-      display: none;
-    }
-    .lines--small {
-      display: block;
-    }
-  }
-  @media screen and (max-width: 470px) {
-    .lines--small {
-      display: none;
-    }
+    margin: 0;
   }
 }
-
-@media screen and (max-width: 1000px) {
-  .footer-container {
+/* Rectangle 314: #314BB4, blur 500 — drawn as a soft radial so it's cheap */
+.glow {
+  left: calc(-460 * var(--f));
+  top: calc(-298 * var(--f));
+  width: calc(3152 * var(--f));
+  height: calc(3131 * var(--f));
+  background: radial-gradient(
+    closest-side,
+    #314bb4 0%,
+    rgb(49 75 180 / 0.9) 42%,
+    rgb(49 75 180 / 0.45) 66%,
+    rgb(49 75 180 / 0) 100%
+  );
+  translate: calc(var(--px, 0) * -30px) 0;
+}
+/* the star pattern, static here (the hero's builds itself) */
+.star {
+  left: calc(1000 * var(--f));
+  top: calc(-260 * var(--f));
+  width: calc(1500 * var(--f));
+  height: auto;
+  opacity: 0.5;
+}
+.tagline {
+  left: calc(40 * var(--f));
+  top: calc(360 * var(--f));
+  width: 13.2em;
+}
+.swoosh {
+  left: calc(-153 * var(--f));
+  top: calc(399 * var(--f));
+  width: calc(1193 * var(--f));
+  height: calc(481.5 * var(--f));
+  img {
+    position: absolute;
+    inset: -4.04% -1.63%;
+    width: 103.26%;
+    height: 108.08%;
+    max-width: none;
+  }
+}
+.credit {
+  /* tucked into the corner: same 40 margin on the right and bottom */
+  right: calc(40 * var(--f));
+  bottom: calc(40 * var(--f));
+  display: flex;
+  align-items: center;
+  /* same size as the tagline (.mono-small), logo scaled to match */
+  --size: max(12px, calc(22 * var(--u)));
+  gap: calc(var(--size) * 0.67);
+  img {
+    width: calc(var(--size) * 1.9);
+    height: auto;
+  }
+  p {
+    font-family: var(--font-label);
+    font-size: var(--size);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+}
+@media (max-width: 700px) {
+  .footer {
     height: 300px;
-    .left-section {
-      top: 120px;
-      left: 40px;
-      @media screen and (max-width: 600px) {
-        left: 20px;
-      }
-    }
+  }
+  .tagline {
+    top: 120px;
+    left: 20px;
+  }
+  .swoosh {
+    top: auto;
+    bottom: -60px;
+    left: -40px;
+    width: 420px;
+    height: 170px;
+  }
+  .credit {
+    left: auto;
+    top: auto;
+    right: 20px;
+    bottom: 20px;
   }
 }

@@ -1,85 +1,37 @@
-import clsx from "clsx";
+import { Countdown } from "../components/Countdown";
+import { EVENT_DATE } from "./Hero";
 import css from "./Schedule.module.css";
-import meteorLeft from "../assets/meteor-left.png";
-import meteorRight from "../assets/meteor-right.png";
-import linesLeft from "../assets/lines-left.png";
-import linesRight from "../assets/lines-right.png";
-import bigStar from "../assets/big-star.png";
-import ellipse from "../assets/ellipse.png";
+
 interface ITimeSlot {
-  start: { time: string; suffix: string };
-  end?: { time: string; suffix: string };
+  start: string;
+  end?: string;
   detail: string;
-  direction: "left" | "right";
 }
 const schedule: ITimeSlot[] = [
-  {
-    start: {
-      time: "10:00",
-      suffix: "AM",
-    },
-    end: {
-      time: "9:00",
-      suffix: "PM",
-    },
-    direction: "right",
-    detail: "Schedule Will Be Announced Soon",
-  },
+  { start: "10:00 AM", end: "9:00 PM", detail: "Schedule will be announced soon" },
 ];
-function TimeSlot({ start, end, detail, direction }: ITimeSlot) {
+
+export function Schedule() {
   return (
-    <div
-      className={clsx(
-        css["timeslot-container"],
-        direction === "left"
-          ? css["timeslot-container--left"]
-          : css["timeslot-container--right"]
-      )}
-    >
-      <div>
-        <span className={css["time"]}>{start.time}</span>
-        <span className={css["suffix"]}>{start.suffix}</span>
-        {end && (
-          <>
-            <span className={css["time"]}>
-              {" - "}
-              {end.time}
-            </span>
-            <span className={css["suffix"]}>{end.suffix}</span>
-          </>
-        )}
-      </div>
-      {direction === "left" ? (
-        <div className={css["details"]}>
-          {detail}
-          <img className={css[""]} src={meteorLeft} alt="" />
-        </div>
-      ) : (
-        <div className={css["details"]}>
-          <img className={css[""]} src={meteorRight} alt="" />
-          {detail}
-        </div>
-      )}
-    </div>
-  );
-}
-export default function Schedule() {
-  return (
-    <section className={css["schedule-section"]}>
-      <div className={css["header"]}>
-        <img className={css["header__left"]} src={linesLeft} alt="" />
-        <img className={css["header__star"]} src={bigStar} alt="" />
-        <img className={css["header__right"]} src={linesRight} alt="" />
-      </div>
+    <section className={css["schedule"]}>
       <div className="clamp-width">
-        <div className={css["timeslots"]}>
-          {/* extra wrapper div for nth child css selection */}
-          {schedule.map((timeSlot) => (
-            <TimeSlot {...timeSlot} key={timeSlot.detail} />
-          ))}
-          <img className={css["ellipse-1"]} src={ellipse} alt="" />
-          <img className={css["ellipse-2"]} src={ellipse} alt="" />
+        <div className={css["head"]} data-reveal>
+          <h2 className="label">Schedule</h2>
+          <p className="subhead">
+            _{EVENT_DATE} · <Countdown to={new Date("2026-11-07T10:00:00-05:00")} />
+          </p>
         </div>
+        <ol className={css["slots"]}>
+          {schedule.map(({ start, end, detail }) => (
+            <li key={detail} className={css["slot"]} data-reveal>
+              <span className={css["time"]}>
+                {start}
+                {end && ` – ${end}`}
+              </span>
+              <span className={`body-sc ${css["detail"]}`}>{detail}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
