@@ -79,11 +79,15 @@
     height: auto;
   }
   p {
-    font-family: var(--font-label);
+    font-family: "Satoshi", var(--font-label);
     font-size: var(--size);
     line-height: 1;
     letter-spacing: -0.04em;
   }
+}
+/* "<3," stays in Inter; the words around it are Satoshi */
+.heart {
+  font-family: var(--font-label);
 }
 @media (max-width: 700px) {
   .footer {
