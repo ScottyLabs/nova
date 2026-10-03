@@ -79,7 +79,7 @@ export function CoverArt() {
   }, []);
 
   return (
-    <div ref={ref} className={css["cover"]} aria-hidden>
+    <div ref={ref} className={css["cover"]} data-void-hide aria-hidden>
       <div
         className={css["stage"]}
         data-parallax

@@ -138,6 +138,11 @@
   }
 }
 
+:global(:root[data-void]) .register {
+  background: transparent;
+  border-color: var(--white);
+}
+
 /* Phones: same pieces, stacked in flow over the field. */
 @media (max-width: 700px) {
   .hero {

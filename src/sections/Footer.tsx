@@ -8,8 +8,8 @@ import css from "./Footer.module.css";
 export function Footer() {
   return (
     <footer className={css["footer"]}>
-      <div className={css["glow"]} data-parallax aria-hidden />
-      <div className={css["star"]} aria-hidden>
+      <div className={css["glow"]} data-parallax data-void-hide aria-hidden />
+      <div className={css["star"]} data-void-hide aria-hidden>
         <img src={footerStar} alt="" />
       </div>
       <p className={`mono-small ${css["tagline"]}`}>CMU&rsquo;s first GenAI playground hackathon</p>

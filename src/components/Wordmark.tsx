@@ -29,6 +29,7 @@ export function Wordmark({ className }: { className?: string }) {
     idle(() => void load());
     return () => {
       cancelled = true;
+      delete document.documentElement.dataset.void;
       metal.current?.dispose();
       metal.current = null;
     };
@@ -36,12 +37,15 @@ export function Wordmark({ className }: { className?: string }) {
 
   const enter = () => {
     hovering.current = true;
+    // the whole page goes to black around the mark (see [data-void] in index.css)
+    document.documentElement.dataset.void = "";
     if (!metal.current) return;
     setLive(true);
     metal.current.setHover(true);
   };
   const leave = () => {
     hovering.current = false;
+    delete document.documentElement.dataset.void;
     metal.current?.setHover(false);
   };
   const move = (e: React.PointerEvent) => {

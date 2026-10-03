@@ -85,3 +85,7 @@
   letter-spacing: -0.03em;
   color: var(--ink);
 }
+
+:global(:root[data-void]) .grid li {
+  background: rgb(255 255 255 / 0.92);
+}
