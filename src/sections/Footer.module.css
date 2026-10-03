@@ -101,23 +101,29 @@
 }
 @media (max-width: 700px) {
   .footer {
-    height: 300px;
+    height: 380px;
+  }
+  .star {
+    left: 34vw;
+    top: 40px;
+    width: 96vw;
+    height: 66vw;
   }
   .tagline {
-    top: 120px;
+    top: 150px;
     left: 20px;
-  }
-  .swoosh {
-    top: auto;
-    bottom: -60px;
-    left: -40px;
-    width: 420px;
-    height: 170px;
   }
   .date {
     left: 20px;
-    top: 160px;
+    top: 196px;
     bottom: auto;
+  }
+  .swoosh {
+    top: auto;
+    bottom: -56px;
+    left: -36px;
+    width: 400px;
+    height: 162px;
   }
   .credit {
     left: auto;

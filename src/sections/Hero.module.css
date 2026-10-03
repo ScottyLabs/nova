@@ -113,7 +113,7 @@
 .sub[data-word="genai"] {
   left: calc(var(--mark-x) + 340.84 * var(--u));
   top: calc(var(--mark-y) + 360 * var(--u));
-  span {
+  > span:first-child {
     margin-left: calc(73 * var(--u));
   }
 }
@@ -181,7 +181,7 @@
   .sub[data-word="genai"] {
     align-self: center;
     margin-top: -1.14em !important;
-    span {
+    > span:first-child {
       margin-left: 1.5em;
     }
   }
@@ -196,5 +196,24 @@
     translate: none;
     margin-top: 28px !important;
     padding: 10px 12px;
+  }
+  /* star sits behind NOVA, wider than the screen like on desktop */
+  .star {
+    left: 50%;
+    top: 10svh;
+    width: 150vw;
+    translate: -50% 0;
+  }
+  .pink[data-pink="left"] {
+    left: -14vw;
+    top: 30svh;
+    width: 26vw;
+    height: 32vw;
+  }
+  .pink[data-pink="right"] {
+    left: 112vw;
+    top: 0;
+    width: 40vw;
+    height: 32vw;
   }
 }
