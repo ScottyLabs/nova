@@ -1,4 +1,5 @@
 import footerStar from "../assets/cover/footer-star.png";
+import { Scramble } from "../components/Scramble";
 import plain from "../assets/cover/nova-wordmark.svg";
 import scottylabs from "../assets/cover/scottylabs.svg";
 import { EVENT_DATE } from "./Hero";
@@ -12,17 +13,24 @@ export function Footer() {
       <div className={css["star"]} data-void-hide aria-hidden>
         <img src={footerStar} alt="" />
       </div>
-      <p className={`mono-small ${css["tagline"]}`}>CMU&rsquo;s first GenAI playground hackathon</p>
+      <p className={`mono-small ${css["tagline"]}`}>
+        <Scramble text="CMU’s first GenAI playground hackathon" onView />
+      </p>
       <div className={css["swoosh"]}>
         <img src={plain} alt="NOVA" />
       </div>
-      <p className={css["date"]}>{EVENT_DATE}</p>
-      <div className={css["credit"]}>
+      <p className={css["date"]}>
+        <Scramble text={EVENT_DATE} delay={250} onView />
+      </p>
+      <div className={css["credit"]} data-reveal>
         <img src={scottylabs} alt="" />
         <p>
-          With <span className={css["heart"]}>&lt;3,</span>
+          <Scramble text="With" delay={450} onView />{" "}
+          <span className={css["heart"]}>
+            <Scramble text="<3," delay={550} onView />
+          </span>
           <br />
-          Scottylabs
+          <Scramble text="Scottylabs" delay={650} onView />
         </p>
       </div>
     </footer>
