@@ -8,9 +8,22 @@ const noise = (text: string) =>
 /** Text that decodes from noise — on mount, or when it scrolls into view with
     `onView` — and again on hover. In Fragment Mono every glyph is the same
     width, so nothing reflows. */
-export function Scramble({ text, delay = 0, onView = false }: { text: string; delay?: number; onView?: boolean }) {
-  // waiting for the viewport: start as noise so the decode has something to resolve
-  const [out, setOut] = useState(() => (onView && !matchMedia("(prefers-reduced-motion: reduce)").matches ? noise(text) : text));
+export function Scramble({
+  text,
+  delay = 0,
+  onView = false,
+  play = true,
+}: {
+  text: string;
+  delay?: number;
+  onView?: boolean;
+  /** hold the decode until this turns true (e.g. the hero intro) */
+  play?: boolean;
+}) {
+  // waiting (for the viewport or `play`): start as noise so the decode has something to resolve
+  const [out, setOut] = useState(() =>
+    (onView || !play) && !matchMedia("(prefers-reduced-motion: reduce)").matches ? noise(text) : text
+  );
   const raf = useRef(0);
   const el = useRef<HTMLSpanElement>(null);
 
@@ -29,6 +42,7 @@ export function Scramble({ text, delay = 0, onView = false }: { text: string; de
   }, [text]);
 
   useEffect(() => {
+    if (!play) return;
     let id = 0;
     let io: IntersectionObserver | undefined;
     if (onView && el.current) {
@@ -53,7 +67,7 @@ export function Scramble({ text, delay = 0, onView = false }: { text: string; de
       // never leave half-scrambled glyphs behind if interrupted
       setOut(text);
     };
-  }, [run, delay, text, onView]);
+  }, [run, delay, text, onView, play]);
 
   return (
     <span ref={el} onPointerEnter={run}>

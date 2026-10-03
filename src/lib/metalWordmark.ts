@@ -85,7 +85,9 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   pivot.add(mesh);
   scene.add(pivot);
 
-  const camera = new THREE.PerspectiveCamera(22, 1, 1, 20000);
+  // long lens, far back: barely any perspective, so the lockup reads as
+  // centred all the way round the spin (a wide lens made the near end balloon)
+  const camera = new THREE.PerspectiveCamera(9, 1, 1, 60000);
   const fit = () => {
     const { width, height } = container.getBoundingClientRect();
     if (!width || !height) return;

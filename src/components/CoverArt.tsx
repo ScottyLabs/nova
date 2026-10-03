@@ -62,10 +62,9 @@ function Layer({ src, box, inner, transform, inset, depth }: ILayer) {
 
 /** The top of the Nova cover (300:144): gradient blobs, pinned
     to the top of its parent and fading into the page's mist. */
-export function CoverArt() {
+export function CoverArt({ onReady }: { onReady?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
-  const [ready, setReady] = useState(false);
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -79,23 +78,22 @@ export function CoverArt() {
     const ro = new ResizeObserver(([entry]) => fit(entry.contentRect.width, entry.contentRect.height));
     ro.observe(el);
 
-    // fade the field in once every blob has loaded, instead of popping in piecemeal
+    // tell the hero once every blob has loaded, so it can bring the art in at once
     const imgs = [...el.querySelectorAll("img")];
-    const check = () => imgs.every((img) => img.complete) && setReady(true);
+    const check = () => imgs.every((img) => img.complete) && onReady?.();
     imgs.forEach((img) => img.addEventListener("load", check));
     check();
     return () => {
       ro.disconnect();
       imgs.forEach((img) => img.removeEventListener("load", check));
     };
-  }, []);
+  }, [onReady]);
 
   return (
     <div ref={ref} className={css["cover"]} data-void-hide aria-hidden>
       <div
         className={css["stage"]}
         data-parallax
-        data-ready={ready || undefined}
         style={{ width: STAGE_W, height: STAGE_H, transform: `translateX(-50%) scale(${scale})` }}
       >
         {layers.map((layer) => (

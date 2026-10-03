@@ -3,7 +3,12 @@
   /* NOVA sits dead centre of the first viewport; the lockup hangs off it */
   --mark-w: calc(1015 * var(--u));
   --mark-h: calc(1015 * 196.07 / 814.84 * var(--u));
-  --mark-x: calc(50% - var(--mark-w) / 2);
+  /* the orbit ring sits 22.9 left of the letters' centre: nudge the letters
+     right by that so the whole lockup is centred */
+  --mark-x: calc(50% - var(--mark-w) / 2 + 22.9 * var(--u));
+  /* art scale: follows whichever of width/height is larger (so a tall,
+     narrow window doesn't shrink the art), and runs 15% over the cover */
+  --ua: calc(max(var(--u), 100svh / 1250) * 1.15);
   /* right-hand column shared by the description and _Hackathon */
   --col-x: calc(1500 * var(--u));
   /* centred in the first viewport, but lifted when needed so the
@@ -24,22 +29,61 @@
   position: absolute;
   margin: 0;
 }
-/* the cover's star (PNG export, 1962×2074 at 1×), scaled to 85% around
-   its Figma centre (1103.7, 756.5) */
+/* all the art (gradient, star, lilac shapes) in one layer, same box as the
+   hero, so it can come in as one */
+.art {
+  position: absolute;
+  inset: 0;
+  transition:
+    opacity 1.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 1.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hero:not([data-intro]) .art {
+  opacity: 0;
+  filter: blur(18px);
+  scale: 1.04;
+}
+/* type follows the art. `filter: opacity()` rather than `opacity`, which the
+   scroll-out animation already drives */
+.hero > p,
+.mark {
+  transition: filter 0.9s ease;
+}
+.hero:not([data-intro]) > p,
+.hero:not([data-intro]) .mark {
+  filter: opacity(0) blur(4px);
+}
+.hero[data-intro] .mark {
+  transition-delay: 0.15s;
+}
+.hero[data-intro] .presented,
+.hero[data-intro] .tagline {
+  transition-delay: 0.35s;
+}
+.hero[data-intro] .about {
+  transition-delay: 0.5s;
+}
+.hero[data-intro] .sub {
+  transition-delay: 0.65s;
+}
+.hero[data-intro] .register {
+  transition-delay: 0.85s;
+}
+/* the cover's star (PNG export, 1962×2074 at 1×, shown at 1667.6×1762.8).
+   Anchored to NOVA, not the page: its centre sits where the cover puts it
+   relative to the mark — 41 left of and 100 below the letters' centre — so
+   the two stay aligned however NOVA moves with the window. */
 .star {
   position: absolute;
-  left: calc(269.9 * var(--u));
-  top: calc(-124.9 * var(--u));
-  width: calc(1667.6 * var(--u));
+  left: calc(var(--mark-x) + var(--mark-w) / 2 - (41 + 833.8) * var(--ua));
+  top: calc(var(--mark-y) + var(--mark-h) / 2 + (100 - 881.4) * var(--ua));
+  width: calc(1667.6 * var(--ua));
   height: auto;
   opacity: 0.7;
   transition: opacity 0.6s ease;
   &:hover {
     opacity: 1;
-  }
-  /* hidden until the PNG has arrived, then fades in */
-  &:not([data-loaded]) {
-    opacity: 0;
   }
 }
 /* lilac clusters: node box at its origin, Figma's relativeTransform, and the
@@ -54,10 +98,10 @@
   }
 }
 .pink[data-pink="left"] {
-  left: calc(-70.74 * var(--u));
-  top: calc(129 * var(--u));
-  width: calc(576.21 * var(--u));
-  height: calc(706.87 * var(--u));
+  left: calc(-70.74 * var(--ua));
+  top: calc(129 * var(--ua));
+  width: calc(576.21 * var(--ua));
+  height: calc(706.87 * var(--ua));
   transform: matrix(0.88785, 0.46014, -0.46014, 0.88785, 0, 0);
   img {
     inset: -2.83% -3.47%;
@@ -65,11 +109,12 @@
     height: 105.66%;
   }
 }
+/* anchored to the right edge (it sat 556.9 past it on the cover) */
 .pink[data-pink="right"] {
-  left: calc(2787.88 * var(--u));
-  top: calc(52.09 * var(--u));
-  width: calc(871.13 * var(--u));
-  height: calc(696.42 * var(--u));
+  left: calc(100% + 556.88 * var(--ua));
+  top: calc(52.09 * var(--ua));
+  width: calc(871.13 * var(--ua));
+  height: calc(696.42 * var(--ua));
   transform: matrix(-0.82041, -0.57177, -0.57177, 0.82041, 0, 0);
   img {
     inset: -7.18% -5.74%;
@@ -147,83 +192,79 @@
   border-color: currentColor;
 }
 
-/* Phones: same pieces, stacked in flow over the field. */
+/* Phones: the portrait poster layout (mobile cover), every piece placed on
+   its grid in poster units (--p = 1/1122 of the screen width). Type keeps a
+   readable floor, so widths are in em where text wraps. */
 @media (max-width: 700px) {
+  /* the hero fills the screen; NOVA sits at its exact centre and every other
+     piece is placed relative to it (poster y minus NOVA's centre, 581.5) */
   .hero {
-    height: auto;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    padding: 24px 20px 48px;
-    --m: calc(100vw - 40px);
-  }
-  .hero > p,
-  .mark {
-    position: relative;
-    left: auto;
-    top: auto;
+    --p: calc(100vw / 1122);
+    height: max(100svh, calc(1760 * var(--p)));
+    min-height: 0;
   }
   .presented {
-    order: 1;
+    left: calc(562 * var(--p));
+    top: calc(50% + -507.5 * var(--p));
   }
   .tagline {
-    order: 2;
-    margin-top: 6px !important;
+    left: calc(84 * var(--p));
+    top: calc(50% + -271.5 * var(--p));
   }
+  /* the orbit NOVA, letters 760 wide so the ring (1022) fits the screen.
+     The ring sits 17 left of the letters' centre, so the letters go at 198
+     to put the whole lockup dead centre (561) */
   .mark {
-    order: 3;
-    width: var(--m);
-    margin-top: 22svh !important;
+    left: calc(198 * var(--p));
+    top: calc(50% + -91.5 * var(--p));
+    width: calc(760 * var(--p));
   }
   .sub {
-    font-size: calc(var(--m) * 0.06);
+    font-size: max(14px, calc(40 * var(--p)));
   }
   .sub[data-word="hackathon"] {
-    order: 4;
-    align-self: flex-end;
-    margin-top: 6vw !important;
+    left: calc(755 * var(--p));
+    top: calc(50% + 174.5 * var(--p));
   }
-  .sub[data-word="the"],
-  .sub[data-word="genai"] {
-    order: 5;
+  .sub[data-word="the"] {
+    left: calc(161 * var(--p));
+    top: calc(50% + 269.5 * var(--p));
   }
   .sub[data-word="genai"] {
-    align-self: center;
-    margin-top: -1.14em !important;
+    left: calc(463 * var(--p));
+    top: calc(50% + 269.5 * var(--p));
     > span:first-child {
-      margin-left: 1.5em;
+      margin-left: calc(64 * var(--p));
     }
   }
   .about {
-    order: 6;
-    width: auto;
-    margin-top: 40px !important;
+    left: calc(147 * var(--p));
+    top: calc(50% + 467.5 * var(--p));
+    width: max(60vw, calc(410 * var(--p)));
   }
   .register {
-    order: 7;
-    align-self: center;
-    translate: none;
-    margin-top: 28px !important;
-    padding: 10px 12px;
+    top: calc(50% + 818.5 * var(--p));
+    font-size: max(12px, calc(30 * var(--p)));
+    padding: 0.4em 0.5em;
   }
-  /* star sits behind NOVA, wider than the screen like on desktop */
+  /* art, as on the poster: the star fills the top left, lilac at both edges */
+  /* star centred on the mark the same way (offsets scaled with it) */
   .star {
-    left: 50%;
-    top: 10svh;
-    width: 150vw;
-    translate: -50% 0;
+    left: calc(-104 * var(--p));
+    top: calc(50% + -609 * var(--p));
+    width: calc(1300 * var(--p));
   }
   .pink[data-pink="left"] {
-    left: -14vw;
-    top: 30svh;
-    width: 26vw;
-    height: 32vw;
+    left: calc(-40 * var(--p));
+    top: calc(50% + -341.5 * var(--p));
+    width: calc(260 * var(--p));
+    height: calc(330 * var(--p));
   }
   .pink[data-pink="right"] {
-    left: 112vw;
-    top: 0;
-    width: 40vw;
-    height: 32vw;
+    left: calc(1250 * var(--p));
+    top: calc(50% + -641.5 * var(--p));
+    width: calc(560 * var(--p));
+    height: calc(450 * var(--p));
   }
 }
 
