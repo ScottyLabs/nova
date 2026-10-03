@@ -184,83 +184,75 @@
   border-color: currentColor;
 }
 
-/* Phones: same pieces, stacked in flow over the field. */
+/* Phones: the portrait poster layout (mobile cover), every piece placed on
+   its grid in poster units (--p = 1/1122 of the screen width). Type keeps a
+   readable floor, so widths are in em where text wraps. */
 @media (max-width: 700px) {
   .hero {
-    height: auto;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    padding: 24px 20px 48px;
-    --m: calc(100vw - 40px);
-  }
-  .hero > p,
-  .mark {
-    position: relative;
-    left: auto;
-    top: auto;
+    --p: calc(100vw / 1122);
+    height: calc(1600 * var(--p));
+    min-height: 0;
   }
   .presented {
-    order: 1;
+    left: calc(562 * var(--p));
+    top: calc(74 * var(--p));
   }
   .tagline {
-    order: 2;
-    margin-top: 6px !important;
+    left: calc(84 * var(--p));
+    top: calc(310 * var(--p));
   }
+  /* the orbit NOVA, letters 760 wide so the ring (≈1.44×) fits the screen,
+     centred where the poster's mark sits */
   .mark {
-    order: 3;
-    width: var(--m);
-    margin-top: 22svh !important;
+    left: calc(228 * var(--p));
+    top: calc(490 * var(--p));
+    width: calc(760 * var(--p));
   }
   .sub {
-    font-size: calc(var(--m) * 0.06);
+    font-size: max(14px, calc(40 * var(--p)));
   }
   .sub[data-word="hackathon"] {
-    order: 4;
-    align-self: flex-end;
-    margin-top: 6vw !important;
+    left: calc(755 * var(--p));
+    top: calc(756 * var(--p));
   }
-  .sub[data-word="the"],
-  .sub[data-word="genai"] {
-    order: 5;
+  .sub[data-word="the"] {
+    left: calc(161 * var(--p));
+    top: calc(851 * var(--p));
   }
   .sub[data-word="genai"] {
-    align-self: center;
-    margin-top: -1.14em !important;
+    left: calc(463 * var(--p));
+    top: calc(851 * var(--p));
     > span:first-child {
-      margin-left: 1.5em;
+      margin-left: calc(64 * var(--p));
     }
   }
   .about {
-    order: 6;
-    width: auto;
-    margin-top: 40px !important;
+    left: calc(147 * var(--p));
+    top: calc(989 * var(--p));
+    width: max(60vw, calc(410 * var(--p)));
   }
   .register {
-    order: 7;
-    align-self: center;
-    translate: none;
-    margin-top: 28px !important;
-    padding: 10px 12px;
+    top: calc(1280 * var(--p));
+    font-size: max(12px, calc(30 * var(--p)));
+    padding: 0.4em 0.5em;
   }
-  /* star sits behind NOVA, wider than the screen like on desktop */
+  /* art, as on the poster: the star fills the top left, lilac at both edges */
   .star {
-    left: 50%;
-    top: 10svh;
-    width: 150vw;
-    translate: -50% 0;
+    left: calc(-60 * var(--p));
+    top: calc(-100 * var(--p));
+    width: calc(1300 * var(--p));
   }
   .pink[data-pink="left"] {
-    left: -14vw;
-    top: 30svh;
-    width: 26vw;
-    height: 32vw;
+    left: calc(-40 * var(--p));
+    top: calc(240 * var(--p));
+    width: calc(260 * var(--p));
+    height: calc(330 * var(--p));
   }
   .pink[data-pink="right"] {
-    left: 112vw;
-    top: 0;
-    width: 40vw;
-    height: 32vw;
+    left: calc(1250 * var(--p));
+    top: calc(-60 * var(--p));
+    width: calc(560 * var(--p));
+    height: calc(450 * var(--p));
   }
 }
 

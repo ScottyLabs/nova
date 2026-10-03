@@ -4,6 +4,9 @@
 }
 .head {
   padding-bottom: 14px;
+  @media (max-width: 700px) {
+    text-align: center;
+  }
 }
 /* each tier: a small centred label over a centred, wrapping row of cards,
    so a short last row sits in the middle instead of hanging left */

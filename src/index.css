@@ -12,7 +12,7 @@
   --font-label: "Inter", system-ui, sans-serif;
   --font-display: "Michroma", system-ui, sans-serif;
 
-  --gutter: clamp(20px, 4vw, 64px);
+  --gutter: clamp(28px, 4vw, 64px);
 
   font-family: var(--font-mono);
   line-height: 1.14;
