@@ -48,10 +48,6 @@ export function Wordmark({ className }: { className?: string }) {
     delete document.documentElement.dataset.void;
     metal.current?.setHover(false);
   };
-  const move = (e: React.PointerEvent) => {
-    const b = e.currentTarget.getBoundingClientRect();
-    metal.current?.setTilt(((e.clientY - b.top) / b.height) * 2 - 1);
-  };
 
   return (
     <div
@@ -59,7 +55,6 @@ export function Wordmark({ className }: { className?: string }) {
       data-live={live || undefined}
       onPointerEnter={enter}
       onPointerLeave={leave}
-      onPointerMove={move}
     >
       <img className={css["logo"]} src={orbit} alt="NOVA" />
       <div ref={stage} className={css["metal"]} aria-hidden />

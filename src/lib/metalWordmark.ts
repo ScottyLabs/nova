@@ -10,7 +10,7 @@ export const OVERSCAN = { x: 1.7, y: 2.4 };
 // the flat mark's box is these letters, so the 3D one is centred and sized on them
 const LETTERS = { cx: 605.37, cy: 144.63, width: 814.84 };
 
-const SPIN = 1.7; // rad/s at full hover speed
+const SPIN = 0.9; // rad/s at full hover speed
 const SPIN_EASE = 2.5; // how quickly it spins up / winds down (1/s)
 const SETTLE = 6; // spring back to front-facing (1/s)
 
@@ -98,8 +98,6 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
 
   let hovered = false;
   let speed = 0;
-  let tilt = 0;
-  let tiltTarget = 0;
   let raf = 0;
   let last = 0;
 
@@ -119,10 +117,8 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
         rest = true;
       }
     }
-    tilt += (tiltTarget - tilt) * Math.min(1, 6 * dt);
-    pivot.rotation.x = tilt;
     renderer.render(scene, camera);
-    if (rest && Math.abs(tilt) < 0.002) {
+    if (rest) {
       raf = 0;
       onRest();
     } else {
@@ -133,15 +129,10 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   return {
     setHover(on: boolean) {
       hovered = on;
-      if (!on) tiltTarget = 0;
       if (!raf) {
         last = performance.now();
         raf = requestAnimationFrame(frame);
       }
-    },
-    /** -1…1 vertical pointer position over the mark: a slight tilt toward it */
-    setTilt(y: number) {
-      tiltTarget = y * 0.25;
     },
     dispose() {
       cancelAnimationFrame(raf);
