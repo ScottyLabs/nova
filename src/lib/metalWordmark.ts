@@ -9,6 +9,8 @@ export const OVERSCAN = { x: 1.7, y: 2.4 };
 // letters of the orbit lockup in the SVG's coordinates (export padding included):
 // the flat mark's box is these letters, so the 3D one is centred and sized on them
 const LETTERS = { cx: 605.37, cy: 144.63, width: 814.84 };
+// centre of the whole lockup (ring included): the spin axis runs through here
+const LOCKUP = { cx: 587.0, cy: 140.76 };
 
 const SPIN = 0.9; // rad/s at full hover speed
 const SPIN_EASE = 2.5; // how quickly it spins up / winds down (1/s)
@@ -61,7 +63,7 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
     bevelSegments: 10,
     curveSegments: 28,
   });
-  geometry.translate(-LETTERS.cx, -LETTERS.cy, -(64 + 2 * 12) / 2);
+  geometry.translate(-LOCKUP.cx, -LOCKUP.cy, -(64 + 2 * 12) / 2);
   const letterWidth = LETTERS.width;
 
   const grain = grainTexture();
@@ -76,7 +78,10 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.rotation.x = Math.PI; // SVG is y-down; flipping keeps the face winding intact
+  // the pivot sits at the lockup's centre; at rest that leaves the letters
+  // centred, exactly over the flat mark (scene y is up, SVG y is down)
   const pivot = new THREE.Group();
+  pivot.position.set(LOCKUP.cx - LETTERS.cx, LETTERS.cy - LOCKUP.cy, 0);
   pivot.add(mesh);
   scene.add(pivot);
 
