@@ -37,7 +37,7 @@ const TIERS: { name: string; sponsors: ISponsor[] }[] = [
   {
     name: "Premier",
     sponsors: [
-      { name: "Mechanize", logo: mechanize, mark: true, aspect: 3.6 },
+      { name: "Mechanize", logo: mechanize, mark: true, aspect: 0.966 },
       { name: "Salesforce", logo: salesforce, knockout: true, aspect: 1.369 },
       { name: "DoorDash", logo: doordash, aspect: 7.221 },
       { name: "HRT", logo: hrt, knockout: true, aspect: 1.704 },
@@ -79,9 +79,13 @@ export function Sponsors() {
                     data-light={s.light || undefined}
                     data-knockout={s.knockout || undefined}
                     data-muted={s.muted || undefined}
-                    style={{ "--a": Math.sqrt(s.aspect) } as React.CSSProperties}
+                    style={{ "--a": Math.sqrt(s.aspect), "--ar": s.aspect } as React.CSSProperties}
                   >
-                    <img src={s.logo} alt={s.mark ? "" : s.name} />
+                    {/* colour logo underneath, a black copy on top that fades out on hover */}
+                    <span className={css["art"]}>
+                      <img className={css["color"]} src={s.logo} alt={s.mark ? "" : s.name} />
+                      <img className={css["ink"]} src={s.logo} alt="" />
+                    </span>
                     {s.mark && <span className={css["wordmark"]}>{s.name}</span>}
                   </span>
                 </li>

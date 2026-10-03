@@ -50,49 +50,69 @@
     --cols: 2;
   }
 }
-/* equal area: width = k·√aspect, height = k/√aspect */
+/* equal area: width = k·√aspect (so height = k/√aspect), never wider than
+   the card or taller than it allows */
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.35em;
+  gap: 0.3em;
   max-width: 100%;
+}
+.art {
+  position: relative;
+  display: block;
+  flex: none;
+  width: min(calc(var(--k) * var(--a)), 100%, calc(34cqi * var(--ar)));
   img {
-    width: calc(var(--k) * var(--a));
-    max-width: 100%;
-    max-height: 34cqi; /* never taller than the card allows */
+    display: block;
+    width: 100%;
     height: auto;
-    object-fit: contain;
-    /* black by default, real colours on hover */
-    filter: brightness(0);
-    transition: filter 0.3s ease;
-  }
-  /* coloured shape → black, its knocked-out type stays light */
-  &[data-knockout] img {
-    filter: grayscale(1) brightness(0.6) contrast(4);
   }
 }
-li:hover .logo:not([data-light]) img {
-  filter: none;
+.ink {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  filter: brightness(0);
+  transition: opacity 0.35s ease;
+}
+li:hover .ink {
+  opacity: 0;
+}
+/* coloured shape → black, its knocked-out type stays light */
+.logo[data-knockout] .ink {
+  filter: grayscale(1) brightness(0.6) contrast(4);
+}
+/* white logo: the black copy is the only visible one, so it never fades */
+.logo[data-light] .color {
+  visibility: hidden;
+}
+.logo[data-light] .ink,
+li:hover .logo[data-light] .ink {
+  opacity: 1;
 }
 /* muted sponsors stay grey, hover included */
-.logo[data-muted] img,
-li:hover .logo[data-muted] img {
-  filter: brightness(0);
+.logo[data-muted] .color {
+  visibility: hidden;
+}
+.logo[data-muted] .ink,
+li:hover .logo[data-muted] .ink {
   opacity: 0.4;
 }
-/* Mechanize: gear mark + name as one lockup, same area as the rest */
-.logo:has(.wordmark) img {
-  width: calc(var(--k) / var(--a));
+/* Mechanize: their gear + the name in a plain serif, as on their own site;
+   the lockup (gear + name ≈ 3.6:1) gets the same area as every other logo */
+.logo:has(.wordmark) .art {
+  width: calc(var(--k) / 1.9);
 }
 .wordmark {
-  font-family: var(--font-label);
+  font-family: "Times New Roman", Times, Georgia, serif;
   font-weight: 400;
-  font-size: calc(var(--k) / var(--a) * 0.62);
-  letter-spacing: -0.03em;
+  font-size: calc(var(--k) / 1.9 * 0.82);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
-/* on the black hover page the cards go near-white so the logos still read */
 :global(:root[data-void]) .grid li {
   background: rgb(255 255 255 / 0.92);
 }
