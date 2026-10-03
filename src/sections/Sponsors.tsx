@@ -22,37 +22,39 @@ interface ISponsor {
   light?: boolean;
   /** logo is a mark only; set the name beside it */
   mark?: boolean;
-  /** optical size nudge, for marks that read small or large at the tier height */
-  scale?: number;
+  /** width ÷ height of the (ink-trimmed) logo file */
+  aspect: number;
 }
 
-// Logo size follows the tier: Jane Street and Premier ($10k+) large, Partner ($5k+) smaller.
+// Logo size follows the tier: Jane Street and Premier ($10k+) large, Partner
+// ($5k+) smaller. Within a tier every logo gets the same visual AREA — a long
+// wordmark is wider but shorter than a compact mark — so none reads bigger.
 const TIERS: { name: string; size: "lg" | "md"; sponsors: ISponsor[] }[] = [
   {
     name: "Premier",
     size: "lg",
     sponsors: [
-      { name: "Jane Street", logo: janestreet, scale: 1.3 },
-      { name: "Mechanize", logo: mechanize, mark: true },
-      { name: "Salesforce", logo: salesforce, scale: 1.5 },
-      { name: "DoorDash", logo: doordash, scale: 0.75 },
-      { name: "HRT", logo: hrt, scale: 1.2 },
-      { name: "VISA", logo: visa, scale: 0.85 },
-      { name: "Jump Trading", logo: jump, scale: 1.5 },
+      { name: "Jane Street", logo: janestreet, aspect: 2.4 },
+      { name: "Mechanize", logo: mechanize, mark: true, aspect: 3.6 },
+      { name: "Salesforce", logo: salesforce, aspect: 1.369 },
+      { name: "DoorDash", logo: doordash, aspect: 7.221 },
+      { name: "HRT", logo: hrt, aspect: 1.704 },
+      { name: "VISA", logo: visa, aspect: 2.843 },
+      { name: "Jump Trading", logo: jump, aspect: 1.164 },
     ],
   },
   {
     name: "Partner",
     size: "md",
     sponsors: [
-      { name: "Perplexity", logo: perplexity, scale: 1.6 },
-      { name: "Recruit Holdings", logo: recruit },
-      { name: "Anduril", logo: anduril },
-      { name: "Runpod", logo: runpod, light: true },
-      { name: "Accenture", logo: accenture },
-      { name: "D. E. Shaw", logo: deshaw },
-      { name: "Citadel", logo: citadel, scale: 0.8 },
-      { name: "Optiver", logo: optiver },
+      { name: "Perplexity", logo: perplexity, aspect: 3.778 },
+      { name: "Recruit Holdings", logo: recruit, aspect: 3.617 },
+      { name: "Anduril", logo: anduril, aspect: 4.828 },
+      { name: "Runpod", logo: runpod, light: true, aspect: 4.151 },
+      { name: "Accenture", logo: accenture, aspect: 3.478 },
+      { name: "D. E. Shaw", logo: deshaw, aspect: 4.101 },
+      { name: "Citadel", logo: citadel, aspect: 7.034 },
+      { name: "Optiver", logo: optiver, aspect: 3.417 },
     ],
   },
 ];
@@ -73,7 +75,7 @@ export function Sponsors() {
                   <span
                     className={css["logo"]}
                     data-light={s.light || undefined}
-                    style={{ "--s": s.scale ?? 1 } as React.CSSProperties}
+                    style={{ "--a": Math.sqrt(s.aspect) } as React.CSSProperties}
                   >
                     <img src={s.logo} alt={s.mark ? "" : s.name} />
                     {s.mark && <span className={css["wordmark"]}>{s.name}</span>}
