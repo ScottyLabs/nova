@@ -134,3 +134,9 @@
     bottom: 20px;
   }
 }
+:global(:root[data-void]) .footer {
+  color: var(--graphite);
+  .date {
+    color: inherit;
+  }
+}
