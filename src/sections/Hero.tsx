@@ -15,13 +15,19 @@ export function Hero() {
     <section className={css["hero"]}>
       <CoverArt />
       {/* cover star "Union (Stroke)" 293:1146, at its render bounds */}
-      <img className={css["star"]} src={heroStar} alt="" />
+      <img
+        className={css["star"]}
+        src={heroStar}
+        alt=""
+        data-void-hide
+        onLoad={(e) => e.currentTarget.setAttribute("data-loaded", "")}
+      />
       {/* lilac clusters 328:1345 (left edge) and 328:1349 (top right),
           each with Figma's progressive blur, in the node's own frame */}
-      <div className={css["pink"]} data-pink="left" aria-hidden>
+      <div className={css["pink"]} data-pink="left" data-void-hide aria-hidden>
         <ProgressiveBlur src={pinkLeft} angle={162} from={0} to={75} blur="calc(10 * var(--u))" />
       </div>
-      <div className={css["pink"]} data-pink="right" aria-hidden>
+      <div className={css["pink"]} data-pink="right" data-void-hide aria-hidden>
         <ProgressiveBlur src={pinkRight} angle={178} from={50} to={97} blur="calc(25 * var(--u))" />
       </div>
       <p className={`mono-small ${css["presented"]}`}>

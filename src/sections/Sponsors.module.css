@@ -1,34 +1,130 @@
 .sponsors {
+  --rule: rgb(43 43 43 / 0.16);
   padding: 0 0 clamp(60px, 8vw, 120px);
 }
 .head {
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--ink);
+}
+/* each tier: a small centred label over a centred, wrapping row of cards,
+   so a short last row sits in the middle instead of hanging left */
+.tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+.tierName {
+  margin: 0;
+  opacity: 0.7;
 }
 .grid {
+  --gap: clamp(8px, 1vw, 14px);
+  --cols: 4;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
   li {
+    flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
     display: grid;
     place-items: center;
-    aspect-ratio: 16 / 9;
-    padding: 24px;
-    border-right: 1px solid rgb(43 43 43 / 0.15);
-    border-bottom: 1px solid rgb(43 43 43 / 0.15);
+    aspect-ratio: 2.6 / 1;
+    padding: 3%;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.5);
+    transition: background 0.2s ease;
+    /* logo size scales with the card: the widest wordmark fills ~85% of it,
+       and every logo gets that same visual area */
+    container-type: inline-size;
+    --k: 31.5cqi;
   }
+  li:hover {
+    background: rgb(255 255 255 / 0.85);
+  }
+  @media (max-width: 700px) {
+    --cols: 2;
+  }
+}
+/* equal area: width = k·√aspect (so height = k/√aspect), never wider than
+   the card or taller than it allows */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  width: 100%;
+}
+.art {
+  position: relative;
+  display: block;
+  flex: none;
+  width: min(calc(var(--k) * var(--a)), 100%, calc(34cqi * var(--ar)));
   img {
-    max-width: 100%;
-    max-height: 44px;
-    /* source logos are last year's orange — render them in ink */
-    filter: brightness(0);
-    opacity: 0.78;
-    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    display: block;
+    width: 100%;
+    height: auto;
   }
-  li:hover img {
-    opacity: 1;
-    transform: scale(1.08);
+}
+.ink {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  filter: brightness(0);
+  transition: opacity 0.35s ease;
+}
+li:hover .ink {
+  opacity: 0;
+}
+/* coloured shape → black, its knocked-out type stays light */
+.logo[data-knockout] .ink {
+  filter: grayscale(1) brightness(0.6) contrast(4);
+}
+/* white logo: the black copy is the only visible one, so it never fades */
+.logo[data-light] .color {
+  visibility: hidden;
+}
+.logo[data-light] .ink,
+li:hover .logo[data-light] .ink {
+  opacity: 1;
+}
+/* muted sponsors stay grey, hover included */
+.logo[data-muted] .color {
+  visibility: hidden;
+}
+.logo[data-muted] .ink,
+li:hover .logo[data-muted] .ink {
+  opacity: 0.4;
+}
+/* Mechanize: their gear + the name in a plain serif, as on their own site;
+   the lockup (gear + name ≈ 3.6:1) gets the same area as every other logo */
+.logo:has(.wordmark) .art {
+  width: calc(var(--k) / 1.9);
+}
+.wordmark {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-weight: 400;
+  font-size: calc(var(--k) / 1.9 * 0.82);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+:global(:root[data-void]) .grid li {
+  background: rgb(255 255 255 / 0.92);
+}
+/* Partner: 5 per row (9 logos → 5 + a centred 4) */
+.grid[data-tier="Partner"] {
+  --cols: 5;
+  @media (max-width: 700px) {
+    --cols: 2;
   }
+}
+/* Premier cards: solid white */
+.grid[data-tier="Premier"] li {
+  background: #fff;
 }

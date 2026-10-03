@@ -52,23 +52,36 @@
   top: calc(690 * var(--f));
   width: 13.2em;
 }
+/* the plain NOVA (300:158 letters, 1015×270), set where the swoosh's letters
+   sat (x −22, y 842, 976 wide) and cropped by the bottom edge */
 .swoosh {
-  left: calc(-153 * var(--f));
-  top: calc(729 * var(--f));
-  width: calc(1193 * var(--f));
-  height: calc(481.5 * var(--f));
+  left: calc(-22 * var(--f));
+  top: calc(842 * var(--f));
+  width: calc(976 * var(--f));
+  aspect-ratio: 1015 / 270.244;
   img {
     position: absolute;
-    inset: -4.04% -1.63%;
-    width: 103.26%;
-    height: 108.08%;
+    left: -3.91%;
+    top: -14.7%;
+    width: 107.82%;
+    height: auto;
     max-width: none;
   }
 }
+/* the date sits in the hero's description column ("Nova is a…", x 1500),
+   on the credit's baseline */
+.date {
+  left: calc(1500 * var(--f));
+  bottom: calc(32 * var(--f));
+  font-family: var(--font-mono);
+  font-size: max(12px, calc(22 * var(--u)));
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
 .credit {
-  /* the cover's corner: 39 from the right, 57 from the bottom */
+  /* bottom-right corner */
   right: calc(39 * var(--f));
-  bottom: calc(57 * var(--f));
+  bottom: calc(32 * var(--f));
   display: flex;
   align-items: center;
   /* same size as the tagline (.mono-small), logo scaled to match */
@@ -91,23 +104,68 @@
 }
 @media (max-width: 700px) {
   .footer {
-    height: 300px;
+    height: 380px;
+  }
+  .star {
+    left: 34vw;
+    top: 40px;
+    width: 96vw;
+    height: 66vw;
   }
   .tagline {
-    top: 120px;
+    top: 150px;
     left: 20px;
+  }
+  .date {
+    left: 20px;
+    top: 196px;
+    bottom: auto;
   }
   .swoosh {
     top: auto;
-    bottom: -60px;
-    left: -40px;
-    width: 420px;
-    height: 170px;
+    bottom: -34px;
+    left: -10px;
+    width: 340px;
   }
   .credit {
     left: auto;
     top: auto;
     right: 20px;
     bottom: 20px;
+  }
+}
+:global(:root[data-void]) .footer {
+  color: var(--graphite);
+  .date {
+    color: inherit;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .footer {
+      view-timeline: --footer block;
+    }
+    .swoosh {
+      animation: rise linear both;
+      animation-timeline: --footer;
+      animation-range: entry 20% entry 100%;
+    }
+    .star {
+      animation: star-drift linear both;
+      animation-timeline: --footer;
+      animation-range: entry 0% exit 0%;
+    }
+  }
+}
+@keyframes rise {
+  from {
+    translate: 0 40%;
+    opacity: 0;
+  }
+}
+@keyframes star-drift {
+  from {
+    translate: 0 12%;
   }
 }

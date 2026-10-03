@@ -2,7 +2,7 @@
 .hero {
   /* NOVA sits dead centre of the first viewport; the lockup hangs off it */
   --mark-w: calc(1015 * var(--u));
-  --mark-h: calc(270.244 * var(--u));
+  --mark-h: calc(1015 * 196.07 / 814.84 * var(--u));
   --mark-x: calc(50% - var(--mark-w) / 2);
   /* right-hand column shared by the description and _Hackathon */
   --col-x: calc(1500 * var(--u));
@@ -33,9 +33,13 @@
   width: calc(1667.6 * var(--u));
   height: auto;
   opacity: 0.7;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.6s ease;
   &:hover {
     opacity: 1;
+  }
+  /* hidden until the PNG has arrived, then fades in */
+  &:not([data-loaded]) {
+    opacity: 0;
   }
 }
 /* lilac clusters: node box at its origin, Figma's relativeTransform, and the
@@ -113,7 +117,7 @@
 .sub[data-word="genai"] {
   left: calc(var(--mark-x) + 340.84 * var(--u));
   top: calc(var(--mark-y) + 360 * var(--u));
-  span {
+  > span:first-child {
     margin-left: calc(73 * var(--u));
   }
 }
@@ -136,6 +140,11 @@
     background: var(--graphite);
     color: #e4e4e4;
   }
+}
+
+:global(:root[data-void]) .register {
+  background: transparent;
+  border-color: currentColor;
 }
 
 /* Phones: same pieces, stacked in flow over the field. */
@@ -181,7 +190,7 @@
   .sub[data-word="genai"] {
     align-self: center;
     margin-top: -1.14em !important;
-    span {
+    > span:first-child {
       margin-left: 1.5em;
     }
   }
@@ -196,5 +205,71 @@
     translate: none;
     margin-top: 28px !important;
     padding: 10px 12px;
+  }
+  /* star sits behind NOVA, wider than the screen like on desktop */
+  .star {
+    left: 50%;
+    top: 10svh;
+    width: 150vw;
+    translate: -50% 0;
+  }
+  .pink[data-pink="left"] {
+    left: -14vw;
+    top: 30svh;
+    width: 26vw;
+    height: 32vw;
+  }
+  .pink[data-pink="right"] {
+    left: 112vw;
+    top: 0;
+    width: 40vw;
+    height: 32vw;
+  }
+}
+
+/* Scroll-out parallax: as the hero leaves the viewport its layers drift up
+   at different speeds and fade, so it peels away in depth. CSS scroll-driven
+   animations (compositor-only); browsers without them just scroll. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      view-timeline: --hero block;
+    }
+    .hero > p,
+    .mark {
+      animation: drift-front linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .star {
+      animation: drift-star linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    .pink {
+      animation: drift-back linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes drift-front {
+  to {
+    transform: translateY(-18vh);
+    opacity: 0;
+  }
+}
+/* .star uses `translate` for its phone centring, .pink uses `transform`
+   for its Figma matrix — so each drifts on the property the other leaves free */
+@keyframes drift-star {
+  to {
+    transform: translateY(-6vh);
+    opacity: 0.25;
+  }
+}
+@keyframes drift-back {
+  to {
+    translate: 0 -6vh;
+    opacity: 0.25;
   }
 }
