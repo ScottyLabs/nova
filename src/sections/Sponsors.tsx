@@ -18,7 +18,7 @@ import css from "./Sponsors.module.css";
 interface ISponsor {
   name: string;
   logo: string;
-  /** logo is white-on-transparent; darken it instead of greying it */
+  /** logo is white-on-transparent; show it dark on the light cards */
   light?: boolean;
   /** logo is a mark only; set the name beside it */
   mark?: boolean;
@@ -66,9 +66,9 @@ export function Sponsors() {
         {TIERS.map((tier) => (
           <div key={tier.name} className={css["tier"]}>
             <p className={`label ${css["tierName"]}`}>{tier.name}</p>
-            <ul className={css["grid"]}>
+            <ul className={css["grid"]} data-tier={tier.name}>
               {tier.sponsors.map((s, i) => (
-                <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 3) * 70}ms` }}>
+                <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 4) * 60}ms` }}>
                   <span
                     className={css["logo"]}
                     data-light={s.light || undefined}
