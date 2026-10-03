@@ -36,10 +36,16 @@
     place-items: center;
     aspect-ratio: 2.6 / 1;
     padding: 3%;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.5);
+    transition: background 0.2s ease;
     /* logo size scales with the card: the widest wordmark fills ~85% of it,
        and every logo gets that same visual area */
     container-type: inline-size;
     --k: 31.5cqi;
+  }
+  li:hover {
+    background: rgb(255 255 255 / 0.85);
   }
   @media (max-width: 700px) {
     --cols: 2;
@@ -81,7 +87,7 @@ li:hover .logo:not([data-light]) img {
   color: var(--ink);
 }
 
-/* on the black hover page the black logos flip to white */
-:global(:root[data-void]) .logo img {
-  filter: brightness(0) invert(1);
+/* on the black hover page the cards go near-white so the logos still read */
+:global(:root[data-void]) .grid li {
+  background: rgb(255 255 255 / 0.92);
 }
