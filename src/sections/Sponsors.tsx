@@ -68,7 +68,7 @@ export function Sponsors() {
             <p className={`label ${css["tierName"]}`}>{tier.name}</p>
             <ul className={css["grid"]}>
               {tier.sponsors.map((s, i) => (
-                <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 4) * 60}ms` }}>
+                <li key={s.name} data-reveal style={{ transitionDelay: `${(i % 3) * 70}ms` }}>
                   <span
                     className={css["logo"]}
                     data-light={s.light || undefined}
