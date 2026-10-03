@@ -66,8 +66,8 @@
   }
 }
 .credit {
-  /* the cover's corner: 39 from the right, 57 from the bottom */
-  right: calc(39 * var(--f));
+  /* lines up with the hero's description column ("Nova is a…", x 1500) */
+  left: calc(1500 * var(--f));
   bottom: calc(57 * var(--f));
   display: flex;
   align-items: center;
