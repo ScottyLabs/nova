@@ -1,9 +1,9 @@
-/* Artboard units, with y measured from 2900 on the cover. --f never drops
+/* Artboard units, with y measured from 2570 on the cover. --f never drops
    below a readable size on phones. */
 .footer {
   --f: max(var(--u), 0.3px);
   position: relative;
-  height: calc(733 * var(--f));
+  height: calc(1063 * var(--f));
   /* clip the sides and the cropped swoosh at the bottom, but let the glow
      rise freely into the page above */
   clip-path: inset(-100vh 0 0 0);
@@ -13,27 +13,31 @@
     margin: 0;
   }
 }
-/* Rectangle 314: #314BB4, blur 500 — drawn as a soft radial so it's cheap */
+/* Rectangle 314: #314BB4, 2152×2131 at (40, 532), blur 1000 — drawn as a
+   soft radial over the rect grown by the blur, so it stays cheap */
 .glow {
-  left: calc(-460 * var(--f));
-  top: calc(-298 * var(--f));
-  width: calc(3152 * var(--f));
-  height: calc(3131 * var(--f));
+  left: calc(-960 * var(--f));
+  top: calc(-468 * var(--f));
+  width: calc(4152 * var(--f));
+  height: calc(4131 * var(--f));
   background: radial-gradient(
     closest-side,
     #314bb4 0%,
-    rgb(49 75 180 / 0.9) 42%,
-    rgb(49 75 180 / 0.45) 66%,
+    rgb(49 75 180 / 0.85) 30%,
+    rgb(49 75 180 / 0.45) 55%,
     rgb(49 75 180 / 0) 100%
   );
   translate: calc(var(--px, 0) * -30px) 0;
 }
-/* "Union (Stroke)" 293:1319 at its cover position (y from 2900), 50% */
+/* "Union (Stroke)" 293:1319: node box at its origin (476, 386), Figma's
+   relativeTransform (rotation + slight skew), 50% */
 .star {
   left: calc(476 * var(--f));
-  top: calc(56 * var(--f));
-  width: calc(2740.85 * var(--f));
-  height: calc(2305 * var(--f));
+  top: calc(386 * var(--f));
+  width: calc(2436.31 * var(--f));
+  height: calc(1673.81 * var(--f));
+  transform-origin: 0 0;
+  transform: matrix(0.96026, -0.27912, 0.23979, 0.97082, 0, 0);
   opacity: 0.5;
   img {
     position: absolute;
@@ -45,12 +49,12 @@
 }
 .tagline {
   left: calc(40 * var(--f));
-  top: calc(360 * var(--f));
+  top: calc(690 * var(--f));
   width: 13.2em;
 }
 .swoosh {
   left: calc(-153 * var(--f));
-  top: calc(399 * var(--f));
+  top: calc(729 * var(--f));
   width: calc(1193 * var(--f));
   height: calc(481.5 * var(--f));
   img {
@@ -62,9 +66,9 @@
   }
 }
 .credit {
-  /* tucked into the corner: same 40 margin on the right and bottom */
-  right: calc(40 * var(--f));
-  bottom: calc(40 * var(--f));
+  /* the cover's corner: 39 from the right, 57 from the bottom */
+  right: calc(39 * var(--f));
+  bottom: calc(57 * var(--f));
   display: flex;
   align-items: center;
   /* same size as the tagline (.mono-small), logo scaled to match */

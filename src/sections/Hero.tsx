@@ -1,5 +1,7 @@
 import { CoverArt } from "../components/CoverArt";
-import { StarPattern } from "../components/StarPattern";
+import heroStar from "../assets/cover/hero-star.png";
+import pinkLeft from "../assets/cover/pink-left.svg";
+import pinkRight from "../assets/cover/pink-right.svg";
 import { Scramble } from "../components/Scramble";
 import { Wordmark } from "../components/Wordmark";
 import css from "./Hero.module.css";
@@ -11,14 +13,15 @@ export function Hero() {
   return (
     <section className={css["hero"]}>
       <CoverArt />
-      {/* centred on NOVA (see --mark-* in Hero.module.css) */}
-      <StarPattern
-        centerX="50%"
-        centerY="calc(var(--mark-y) + var(--mark-h) / 2)"
-        width={1700}
-        opacity={0.7}
-        hoverOpacity={1}
-      />
+      {/* cover star "Union (Stroke)" 293:1146, at its render bounds */}
+      <img className={css["star"]} src={heroStar} alt="" />
+      {/* lilac clusters 328:1345 (left edge) and 328:1349 (top right) */}
+      <div className={css["pink"]} data-pink="left" aria-hidden>
+        <img src={pinkLeft} alt="" />
+      </div>
+      <div className={css["pink"]} data-pink="right" aria-hidden>
+        <img src={pinkRight} alt="" />
+      </div>
       <p className={`mono-small ${css["presented"]}`}>
         <Scramble text="Presented by Scottylabs" delay={200} />
       </p>

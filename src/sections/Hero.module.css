@@ -24,6 +24,55 @@
   position: absolute;
   margin: 0;
 }
+/* the cover's star (PNG export, 1962×2074 at 1×): its unclipped bottom
+   sits at y 1793.6, so the top bleeds 280 above the page */
+.star {
+  position: absolute;
+  left: calc(122.7 * var(--u));
+  top: calc(-280.4 * var(--u));
+  width: calc(1961.9 * var(--u));
+  height: auto;
+  opacity: 0.7;
+  transition: opacity 0.45s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+/* lilac clusters: node box at its origin, Figma's relativeTransform, and the
+   export's blur padding as a negative inset */
+.pink {
+  position: absolute;
+  transform-origin: 0 0;
+  pointer-events: none;
+  img {
+    position: absolute;
+    max-width: none;
+  }
+}
+.pink[data-pink="left"] {
+  left: calc(-70.74 * var(--u));
+  top: calc(129 * var(--u));
+  width: calc(576.21 * var(--u));
+  height: calc(706.87 * var(--u));
+  transform: matrix(0.88785, 0.46014, -0.46014, 0.88785, 0, 0);
+  img {
+    inset: -2.83% -3.47%;
+    width: 106.94%;
+    height: 105.66%;
+  }
+}
+.pink[data-pink="right"] {
+  left: calc(2787.88 * var(--u));
+  top: calc(52.09 * var(--u));
+  width: calc(871.13 * var(--u));
+  height: calc(696.42 * var(--u));
+  transform: matrix(-0.82041, -0.57177, -0.57177, 0.82041, 0, 0);
+  img {
+    inset: -7.18% -5.74%;
+    width: 111.48%;
+    height: 114.36%;
+  }
+}
 .presented {
   left: calc(637 * var(--u));
   top: calc(83 * var(--u));
