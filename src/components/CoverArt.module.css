@@ -10,6 +10,11 @@
   left: 50%;
   top: 0;
   transform-origin: top center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.stage[data-ready] {
+  opacity: 1;
 }
 .layer {
   position: absolute;

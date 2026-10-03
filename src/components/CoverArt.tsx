@@ -65,17 +65,29 @@ function Layer({ src, box, inner, transform, inset, depth }: ILayer) {
 export function CoverArt() {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [ready, setReady] = useState(false);
 
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect;
-      // fill the width; on narrow screens keep enough height to read as a field
+    // fill the width; on narrow screens keep enough height to read as a field
+    const fit = (width: number, height: number) =>
       setScale(Math.max(width / STAGE_W, Math.min(height, 900) / STAGE_H));
-    });
+    // measure before the first paint, so it never shows at the wrong scale
+    const r = el.getBoundingClientRect();
+    fit(r.width, r.height);
+    const ro = new ResizeObserver(([entry]) => fit(entry.contentRect.width, entry.contentRect.height));
     ro.observe(el);
-    return () => ro.disconnect();
+
+    // fade the field in once every blob has loaded, instead of popping in piecemeal
+    const imgs = [...el.querySelectorAll("img")];
+    const check = () => imgs.every((img) => img.complete) && setReady(true);
+    imgs.forEach((img) => img.addEventListener("load", check));
+    check();
+    return () => {
+      ro.disconnect();
+      imgs.forEach((img) => img.removeEventListener("load", check));
+    };
   }, []);
 
   return (
@@ -83,6 +95,7 @@ export function CoverArt() {
       <div
         className={css["stage"]}
         data-parallax
+        data-ready={ready || undefined}
         style={{ width: STAGE_W, height: STAGE_H, transform: `translateX(-50%) scale(${scale})` }}
       >
         {layers.map((layer) => (

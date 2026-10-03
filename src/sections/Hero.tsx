@@ -15,7 +15,13 @@ export function Hero() {
     <section className={css["hero"]}>
       <CoverArt />
       {/* cover star "Union (Stroke)" 293:1146, at its render bounds */}
-      <img className={css["star"]} src={heroStar} alt="" data-void-hide />
+      <img
+        className={css["star"]}
+        src={heroStar}
+        alt=""
+        data-void-hide
+        onLoad={(e) => e.currentTarget.setAttribute("data-loaded", "")}
+      />
       {/* lilac clusters 328:1345 (left edge) and 328:1349 (top right),
           each with Figma's progressive blur, in the node's own frame */}
       <div className={css["pink"]} data-pink="left" data-void-hide aria-hidden>

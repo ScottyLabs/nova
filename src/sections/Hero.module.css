@@ -33,9 +33,13 @@
   width: calc(1667.6 * var(--u));
   height: auto;
   opacity: 0.7;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.6s ease;
   &:hover {
     opacity: 1;
+  }
+  /* hidden until the PNG has arrived, then fades in */
+  &:not([data-loaded]) {
+    opacity: 0;
   }
 }
 /* lilac clusters: node box at its origin, Figma's relativeTransform, and the
