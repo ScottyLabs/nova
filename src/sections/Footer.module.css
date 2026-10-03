@@ -116,7 +116,8 @@
   }
   .date {
     left: 20px;
-    bottom: 20px;
+    top: 160px;
+    bottom: auto;
   }
   .credit {
     left: auto;
