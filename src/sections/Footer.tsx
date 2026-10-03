@@ -1,17 +1,27 @@
+import footerStar from "../assets/cover/footer-star.png";
+import swoosh from "../assets/cover/nova-swoosh-footer.svg";
+import scottylabs from "../assets/cover/scottylabs.svg";
 import css from "./Footer.module.css";
-import novaLogo from "../assets/nova--transparent.png";
-import footerLines from "../assets/footer-lines.png";
-import footerLinesSmall from "../assets/footer-lines--small.png";
-export default function Footer() {
+
+/** Bottom of the cover (300:144, y ≥ 2900): blue glow, static star, cropped swoosh. */
+export function Footer() {
   return (
-    <footer className={css["footer-container"]}>
-      <div className="clamp-width">
-        <div className={css["left-section"]}>
-          <img className={css[""]} src={novaLogo} alt="" />
-          <span className={css[""]}>Presented by ScottyLabs &lt;3</span>
-        </div>
-        <img className={css["lines--large"]} src={footerLines} alt="" />
-        <img className={css["lines--small"]} src={footerLinesSmall} alt="" />
+    <footer className={css["footer"]}>
+      <div className={css["glow"]} data-parallax aria-hidden />
+      <div className={css["star"]} aria-hidden>
+        <img src={footerStar} alt="" />
+      </div>
+      <p className={`mono-small ${css["tagline"]}`}>CMU&rsquo;s first GenAI playground hackathon</p>
+      <div className={css["swoosh"]}>
+        <img src={swoosh} alt="NOVA" />
+      </div>
+      <div className={css["credit"]}>
+        <img src={scottylabs} alt="" />
+        <p>
+          With &lt;3,
+          <br />
+          Scottylabs
+        </p>
       </div>
     </footer>
   );

@@ -1,124 +1,199 @@
-.hero-section-bg {
-  background: linear-gradient(
-    180deg,
-    #101c1c 0%,
-    #101c1c 73.89%,
-    #173c46 78.52%,
-    #226981 81.29%,
-    #33b2e2 83.93%,
-    #f1ede6 86.79%,
-    #ff8945 91.24%,
-    #14478f 91.36%,
-    #101c1c 94.42%
+/* Positions are the cover artboard's (300:144), in --u units. */
+.hero {
+  /* NOVA sits dead centre of the first viewport; the lockup hangs off it */
+  --mark-w: calc(1015 * var(--u));
+  --mark-h: calc(270.244 * var(--u));
+  --mark-x: calc(50% - var(--mark-w) / 2);
+  /* right-hand column shared by the description and _Hackathon */
+  --col-x: calc(1500 * var(--u));
+  /* centred in the first viewport, but lifted when needed so the
+     registration box (580 below NOVA, ~57 tall) stays above the fold */
+  --mark-y: max(
+    calc(360 * var(--u)),
+    min(
+      calc(50svh - var(--mark-h) / 2),
+      calc(100svh - 637 * var(--u) - 48px)
+    )
   );
-}
-.hero-section {
-  display: flow-root; /* prevents parent-child margin collapse */
   position: relative;
+  height: max(calc(1420 * var(--u)), calc(var(--mark-y) + 770 * var(--u)));
+  color: var(--white);
 }
-.hero-container {
-  margin: 150px auto;
-  max-width: 1000px;
-  display: flex;
-
-  flex-direction: column;
-  align-items: center;
-  font-family: "Poppins";
-  padding: 0 30px;
-
-  .hero__logo {
-    width: 100%;
-    max-width: 500px;
-  }
-  .hero__date {
-    color: hsl(38, 28%, 92%);
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-  .hero__description {
-    font-size: 1.125rem;
-    color: hsl(38, 28%, 92%);
-    margin-top: 15px;
-    font-weight: 400;
-    text-align: center;
-    max-width: 800px;
-  }
-  .hero__button {
-    border: 1px solid #f1ede6;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px 42px;
-    font-size: 1.35rem;
-    color: #f1ede6;
-    border-radius: 70px;
-    margin-top: 50px;
-    transition: 0.1s ease;
-    will-change: scale;
-    &:not(:disabled):hover {
-      scale: 1.04;
-      background: rgba(0, 0, 0, 0);
-      &:active {
-        scale: 1;
-      }
-    }
-    &:disabled {
-      opacity: 0.5;
-      pointer-events: none;
-      cursor: default;
-    }
-  }
-  @media screen and (max-width: 500px) {
-    align-items: flex-start;
-    .hero__description {
-      text-align: left;
-      font-size: 14px;
-    }
-    .hero__logo {
-      position: relative;
-      transform: translate(-12%, 0);
-      /* left: -30px; */
-    }
-  }
-}
-
-.header-decoration {
+.hero > p,
+.mark {
   position: absolute;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  inset: 0;
-  height: 80px;
-  @media screen and (max-width: 750px) {
-    & {
-      padding: 10px;
-    }
+  margin: 0;
+}
+/* the cover's star (PNG export, 1962×2074 at 1×): its unclipped bottom
+   sits at y 1793.6, so the top bleeds 280 above the page */
+.star {
+  position: absolute;
+  left: calc(122.7 * var(--u));
+  top: calc(-280.4 * var(--u));
+  width: calc(1961.9 * var(--u));
+  height: auto;
+  opacity: 0.7;
+  transition: opacity 0.45s ease;
+  &:hover {
+    opacity: 1;
   }
-  .header__star {
-    height: 100%;
+}
+/* lilac clusters: node box at its origin, Figma's relativeTransform, and the
+   export's blur padding as a negative inset */
+.pink {
+  position: absolute;
+  transform-origin: 0 0;
+  pointer-events: none;
+  img {
+    position: absolute;
+    max-width: none;
   }
-  .header__streak {
+}
+.pink[data-pink="left"] {
+  left: calc(-70.74 * var(--u));
+  top: calc(129 * var(--u));
+  width: calc(576.21 * var(--u));
+  height: calc(706.87 * var(--u));
+  transform: matrix(0.88785, 0.46014, -0.46014, 0.88785, 0, 0);
+  img {
+    inset: -2.83% -3.47%;
+    width: 106.94%;
+    height: 105.66%;
+  }
+}
+.pink[data-pink="right"] {
+  left: calc(2787.88 * var(--u));
+  top: calc(52.09 * var(--u));
+  width: calc(871.13 * var(--u));
+  height: calc(696.42 * var(--u));
+  transform: matrix(-0.82041, -0.57177, -0.57177, 0.82041, 0, 0);
+  img {
+    inset: -7.18% -5.74%;
+    width: 111.48%;
+    height: 114.36%;
+  }
+}
+.presented {
+  left: calc(637 * var(--u));
+  top: calc(83 * var(--u));
+  width: 8.2em;
+}
+.tagline {
+  left: calc(95 * var(--u));
+  top: calc(350 * var(--u));
+  width: 13.2em;
+}
+.about {
+  left: var(--col-x);
+  top: calc(181 * var(--u));
+  width: 20.3em;
+}
+.mark {
+  left: var(--mark-x);
+  top: var(--mark-y);
+  width: var(--mark-w);
+  font-size: 0;
+}
+.sub {
+  font-family: var(--font-mono);
+  font-size: calc(43.778 * var(--u));
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+.sub[data-word="hackathon"] {
+  left: var(--col-x);
+  top: calc(var(--mark-y) + 300 * var(--u));
+}
+.sub[data-word="the"] {
+  left: var(--mark-x);
+  top: calc(var(--mark-y) + 360 * var(--u));
+}
+.sub[data-word="genai"] {
+  left: calc(var(--mark-x) + 340.84 * var(--u));
+  top: calc(var(--mark-y) + 360 * var(--u));
+  span {
+    margin-left: calc(73 * var(--u));
+  }
+}
+.register {
+  left: 50%;
+  translate: -50% 0;
+  top: calc(var(--mark-y) + 580 * var(--u));
+  padding: 0.45em 0.5em;
+  background: #e4e4e4;
+  border: 1px solid #000;
+  color: var(--graphite);
+  font-family: var(--font-mono);
+  /* same size as the tagline (.mono-small) */
+  font-size: max(12px, calc(22 * var(--u)));
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+  &:hover {
+    background: var(--graphite);
+    color: #e4e4e4;
+  }
+}
+
+/* Phones: same pieces, stacked in flow over the field. */
+@media (max-width: 700px) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
     display: flex;
-    gap: 4px;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    img {
-      height: 20px;
-      @media screen and (max-width: 700px) {
-        & {
-          height: 14px;
-        }
-      }
-      @media screen and (max-width: 350px) {
-        & {
-          display: none;
-        }
-      }
-    }
+    flex-direction: column;
+    padding: 24px 20px 48px;
+    --m: calc(100vw - 40px);
+  }
+  .hero > p,
+  .mark {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+  .presented {
+    order: 1;
+  }
+  .tagline {
+    order: 2;
+    margin-top: 6px !important;
+  }
+  .mark {
+    order: 3;
+    width: var(--m);
+    margin-top: 22svh !important;
+  }
+  .sub {
+    font-size: calc(var(--m) * 0.06);
+  }
+  .sub[data-word="hackathon"] {
+    order: 4;
+    align-self: flex-end;
+    margin-top: 6vw !important;
+  }
+  .sub[data-word="the"],
+  .sub[data-word="genai"] {
+    order: 5;
+  }
+  .sub[data-word="genai"] {
+    align-self: center;
+    margin-top: -1.14em !important;
     span {
-      font-size: 1.125rem;
-      color: #f1ede6;
-      text-align: right;
+      margin-left: 1.5em;
     }
+  }
+  .about {
+    order: 6;
+    width: auto;
+    margin-top: 40px !important;
+  }
+  .register {
+    order: 7;
+    align-self: center;
+    translate: none;
+    margin-top: 28px !important;
+    padding: 10px 12px;
   }
 }

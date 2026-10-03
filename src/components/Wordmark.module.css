@@ -1,0 +1,13 @@
+.wordmark {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1015 / 270.244;
+}
+.logo {
+  position: absolute;
+  left: -3.91%;
+  top: -14.7%;
+  width: 107.82%;
+  max-width: none;
+  height: auto;
+}
