@@ -65,12 +65,14 @@
 .hero[data-intro] .register {
   transition-delay: 0.85s;
 }
-/* the cover's star (PNG export, 1962×2074 at 1×), scaled to 85% around
-   its Figma centre (1103.7, 756.5) */
+/* the cover's star (PNG export, 1962×2074 at 1×, shown at 1667.6×1762.8).
+   Anchored to NOVA, not the page: its centre sits where the cover puts it
+   relative to the mark — 41 left of and 100 below the letters' centre — so
+   the two stay aligned however NOVA moves with the window. */
 .star {
   position: absolute;
-  left: calc(269.9 * var(--u));
-  top: calc(-124.9 * var(--u));
+  left: calc(var(--mark-x) + var(--mark-w) / 2 - (41 + 833.8) * var(--u));
+  top: calc(var(--mark-y) + var(--mark-h) / 2 + (100 - 881.4) * var(--u));
   width: calc(1667.6 * var(--u));
   height: auto;
   opacity: 0.7;
@@ -237,9 +239,10 @@
     padding: 0.4em 0.5em;
   }
   /* art, as on the poster: the star fills the top left, lilac at both edges */
+  /* star centred on the mark the same way (offsets scaled with it) */
   .star {
-    left: calc(-60 * var(--p));
-    top: calc(-100 * var(--p));
+    left: calc(-74 * var(--p));
+    top: calc(-27.5 * var(--p));
     width: calc(1300 * var(--p));
   }
   .pink[data-pink="left"] {
