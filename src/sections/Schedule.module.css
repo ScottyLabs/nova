@@ -1,31 +1,44 @@
 .schedule {
   padding: clamp(40px, 6vw, 100px) 0 clamp(60px, 8vw, 120px);
 }
-.head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+/* one grid for the header and the rows: the right column is exactly as wide
+   as the date/countdown, so row details start on its left edge and wrap
+   inside it */
+.table {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  column-gap: 24px;
+}
+.head,
+.slots {
+  display: contents;
+}
+.head > * {
   padding-bottom: 14px;
+}
+.date {
+  align-self: baseline;
 }
 .slots {
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 .slot {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: 24px;
+  grid-template-columns: subgrid;
   align-items: baseline;
   padding: 24px 0;
   border-bottom: 1px solid rgb(43 43 43 / 0.25);
   transition: padding 0.3s ease, color 0.2s ease;
   &:hover {
     color: var(--cobalt);
-    padding-left: 16px;
   }
-  @media (max-width: 700px) {
+}
+@media (max-width: 700px) {
+  .table {
     grid-template-columns: 1fr;
+  }
+  .slot {
     gap: 8px;
   }
 }
@@ -38,4 +51,7 @@
 .detail {
   font-size: clamp(1.125rem, 1.8vw, 1.5rem);
   text-align: left;
+  /* wrap inside the column instead of widening it */
+  width: 0;
+  min-width: 100%;
 }

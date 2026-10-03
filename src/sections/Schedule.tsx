@@ -15,9 +15,10 @@ export function Schedule() {
   return (
     <section className={css["schedule"]}>
       <div className="clamp-width">
+        <div className={css["table"]}>
         <div className={css["head"]} data-reveal>
           <h2 className="section-title">Schedule</h2>
-          <p className="subhead">
+          <p className={`subhead ${css["date"]}`}>
             _{EVENT_DATE} · <Countdown to={new Date("2026-11-07T10:00:00-05:00")} />
           </p>
         </div>
@@ -32,6 +33,7 @@ export function Schedule() {
             </li>
           ))}
         </ol>
+        </div>
       </div>
     </section>
   );
