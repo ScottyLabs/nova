@@ -30,7 +30,9 @@
   }
 }
 .time {
-  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  /* sized so "10:00 AM – 9:00 PM" always fits its column on one line */
+  font-size: clamp(1.25rem, 2.6vw, 3rem);
+  white-space: nowrap;
   letter-spacing: -0.04em;
 }
 .detail {
