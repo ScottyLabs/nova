@@ -4,7 +4,11 @@ import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
 
 /** How much wider/taller than the flat wordmark the canvas is (room to spin).
     Must match .metal's insets in Wordmark.module.css. */
-export const OVERSCAN = { x: 1.3, y: 2.2 };
+export const OVERSCAN = { x: 1.7, y: 2.4 };
+
+// letters of the orbit lockup in the SVG's coordinates (export padding included):
+// the flat mark's box is these letters, so the 3D one is centred and sized on them
+const LETTERS = { cx: 605.37, cy: 144.63, width: 814.84 };
 
 const SPIN = 1.7; // rad/s at full hover speed
 const SPIN_EASE = 2.5; // how quickly it spins up / winds down (1/s)
@@ -57,9 +61,8 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
     bevelSegments: 10,
     curveSegments: 28,
   });
-  geometry.center();
-  geometry.computeBoundingBox();
-  const letterWidth = geometry.boundingBox!.max.x - geometry.boundingBox!.min.x;
+  geometry.translate(-LETTERS.cx, -LETTERS.cy, -(64 + 2 * 12) / 2);
+  const letterWidth = LETTERS.width;
 
   const grain = grainTexture();
   const material = new THREE.MeshPhysicalMaterial({

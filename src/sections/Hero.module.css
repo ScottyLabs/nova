@@ -2,7 +2,7 @@
 .hero {
   /* NOVA sits dead centre of the first viewport; the lockup hangs off it */
   --mark-w: calc(1015 * var(--u));
-  --mark-h: calc(270.244 * var(--u));
+  --mark-h: calc(1015 * 196.07 / 814.84 * var(--u));
   --mark-x: calc(50% - var(--mark-w) / 2);
   /* right-hand column shared by the description and _Hackathon */
   --col-x: calc(1500 * var(--u));

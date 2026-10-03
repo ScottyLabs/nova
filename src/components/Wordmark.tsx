@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import plain from "../assets/cover/nova-wordmark.svg";
-import svgSource from "../assets/cover/nova-wordmark.svg?raw";
+import orbit from "../assets/cover/nova-orbit.svg";
+import svgSource from "../assets/cover/nova-orbit.svg?raw";
 import type { createMetalWordmark } from "../lib/metalWordmark";
 import css from "./Wordmark.module.css";
 
 type Metal = ReturnType<typeof createMetalWordmark>;
 
-/** NOVA wordmark (300:158). Flat white; on hover it turns into spinning 3D
+/** NOVA orbit wordmark (340:1616). Flat white; on hover it turns into spinning 3D
     chrome (three.js, loaded in the background once the page is idle). */
 export function Wordmark({ className }: { className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
@@ -57,7 +57,7 @@ export function Wordmark({ className }: { className?: string }) {
       onPointerLeave={leave}
       onPointerMove={move}
     >
-      <img className={css["logo"]} src={plain} alt="NOVA" />
+      <img className={css["logo"]} src={orbit} alt="NOVA" />
       <div ref={stage} className={css["metal"]} aria-hidden />
     </div>
   );

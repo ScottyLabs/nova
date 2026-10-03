@@ -52,16 +52,19 @@
   top: calc(690 * var(--f));
   width: 13.2em;
 }
+/* the plain NOVA (300:158 letters, 1015×270), set where the swoosh's letters
+   sat (x −22, y 842, 976 wide) and cropped by the bottom edge */
 .swoosh {
-  left: calc(-153 * var(--f));
-  top: calc(729 * var(--f));
-  width: calc(1193 * var(--f));
-  height: calc(481.5 * var(--f));
+  left: calc(-22 * var(--f));
+  top: calc(842 * var(--f));
+  width: calc(976 * var(--f));
+  aspect-ratio: 1015 / 270.244;
   img {
     position: absolute;
-    inset: -4.04% -1.63%;
-    width: 103.26%;
-    height: 108.08%;
+    left: -3.91%;
+    top: -14.7%;
+    width: 107.82%;
+    height: auto;
     max-width: none;
   }
 }
@@ -120,10 +123,9 @@
   }
   .swoosh {
     top: auto;
-    bottom: -56px;
-    left: -36px;
-    width: 400px;
-    height: 162px;
+    bottom: -34px;
+    left: -10px;
+    width: 340px;
   }
   .credit {
     left: auto;

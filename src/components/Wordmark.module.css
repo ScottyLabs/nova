@@ -1,13 +1,15 @@
+/* The box is the NOVA letters (814.8×196.1 in 340:1616); the orbit ring and
+   the export's shadow padding overhang it. */
 .wordmark {
   position: relative;
   width: 100%;
-  aspect-ratio: 1015 / 270.244;
+  aspect-ratio: 814.84 / 196.07;
 }
 .logo {
   position: absolute;
-  left: -3.91%;
-  top: -14.7%;
-  width: 107.82%;
+  left: -24.29%;
+  top: -23.77%;
+  width: 144.07%;
   max-width: none;
   height: auto;
   transition: opacity 0.25s ease;
@@ -16,10 +18,10 @@
    the spin has room; at rest its letters sit exactly on the flat ones */
 .metal {
   position: absolute;
-  left: -15%;
-  right: -15%;
-  top: -60%;
-  bottom: -60%;
+  left: -35%;
+  right: -35%;
+  top: -70%;
+  bottom: -70%;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s ease;

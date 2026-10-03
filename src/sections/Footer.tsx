@@ -1,10 +1,10 @@
 import footerStar from "../assets/cover/footer-star.png";
-import swoosh from "../assets/cover/nova-swoosh-footer.svg";
+import plain from "../assets/cover/nova-wordmark.svg";
 import scottylabs from "../assets/cover/scottylabs.svg";
 import { EVENT_DATE } from "./Hero";
 import css from "./Footer.module.css";
 
-/** Bottom of the cover (300:144, y ≥ 2900): blue glow, static star, cropped swoosh. */
+/** Bottom of the cover (300:144, y ≥ 2900): blue glow, static star, cropped NOVA. */
 export function Footer() {
   return (
     <footer className={css["footer"]}>
@@ -14,7 +14,7 @@ export function Footer() {
       </div>
       <p className={`mono-small ${css["tagline"]}`}>CMU&rsquo;s first GenAI playground hackathon</p>
       <div className={css["swoosh"]}>
-        <img src={swoosh} alt="NOVA" />
+        <img src={plain} alt="NOVA" />
       </div>
       <p className={css["date"]}>{EVENT_DATE}</p>
       <div className={css["credit"]}>
