@@ -69,10 +69,17 @@
     max-height: 34cqi; /* never taller than the card allows */
     height: auto;
     object-fit: contain;
-  }
-  &[data-light] img {
+    /* black by default, real colours on hover */
     filter: brightness(0);
+    transition: filter 0.3s ease;
   }
+  /* coloured shape → black, its knocked-out type stays light */
+  &[data-knockout] img {
+    filter: grayscale(1) brightness(0.6) contrast(4);
+  }
+}
+li:hover .logo:not([data-light]) img {
+  filter: none;
 }
 /* Mechanize: gear mark + name as one lockup, same area as the rest */
 .logo:has(.wordmark) img {

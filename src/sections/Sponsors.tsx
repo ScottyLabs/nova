@@ -20,6 +20,9 @@ interface ISponsor {
   logo: string;
   /** logo is white-on-transparent; show it dark on the light cards */
   light?: boolean;
+  /** white type knocked out of a coloured shape: keep the type light when
+      the logo is shown in black */
+  knockout?: boolean;
   /** logo is a mark only; set the name beside it */
   mark?: boolean;
   /** width ÷ height of the (ink-trimmed) logo file */
@@ -33,9 +36,9 @@ const TIERS: { name: string; sponsors: ISponsor[] }[] = [
     name: "Premier",
     sponsors: [
       { name: "Mechanize", logo: mechanize, mark: true, aspect: 3.6 },
-      { name: "Salesforce", logo: salesforce, aspect: 1.369 },
+      { name: "Salesforce", logo: salesforce, knockout: true, aspect: 1.369 },
       { name: "DoorDash", logo: doordash, aspect: 7.221 },
-      { name: "HRT", logo: hrt, aspect: 1.704 },
+      { name: "HRT", logo: hrt, knockout: true, aspect: 1.704 },
       { name: "VISA", logo: visa, aspect: 2.843 },
       { name: "Jump Trading", logo: jump, aspect: 1.164 },
     ],
@@ -72,6 +75,7 @@ export function Sponsors() {
                   <span
                     className={css["logo"]}
                     data-light={s.light || undefined}
+                    data-knockout={s.knockout || undefined}
                     style={{ "--a": Math.sqrt(s.aspect) } as React.CSSProperties}
                   >
                     <img src={s.logo} alt={s.mark ? "" : s.name} />
