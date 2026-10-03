@@ -6,7 +6,6 @@
   justify-content: space-between;
   align-items: baseline;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--ink);
 }
 .slots {
   list-style: none;
