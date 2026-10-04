@@ -1,5 +1,39 @@
 .schedule {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
   padding: clamp(40px, 6vw, 100px) 0 clamp(120px, 14vw, 220px);
+}
+.schedule > :global(.clamp-width) {
+  position: relative;
+}
+/* Pink star clusters behind the schedule: always big, bleeding off the
+   edges, never scattered small. */
+.stars {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  height: auto;
+  max-width: none;
+}
+/* same slant and skew as the footer's star (Footer.module.css .star) */
+.star[data-star="a"] {
+  width: clamp(620px, 86vw, 1600px);
+  top: -10%;
+  right: -34%;
+  transform: matrix(0.96026, -0.27912, 0.23979, 0.97082, 0, 0);
+  opacity: 0.75;
+}
+.star[data-star="b"] {
+  width: clamp(520px, 70vw, 1300px);
+  bottom: -18%;
+  left: -30%;
+  transform: matrix(-0.96026, -0.27912, -0.23979, 0.97082, 0, 0);
+  opacity: 0.6;
 }
 /* one grid for the header and the rows: the right column is exactly as wide
    as the date/countdown, so row details start on its left edge and wrap
