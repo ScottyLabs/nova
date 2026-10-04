@@ -106,7 +106,7 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   let hovered = false;
   // a single tap-triggered turn (touch screens): eased, fixed length
   let once: { from: number; start: number } | null = null;
-  const ONCE_MS = 2400;
+  const ONCE_MS = 1600; // a twirl, not a showcase
   let speed = 0;
   let raf = 0;
   let last = 0;
