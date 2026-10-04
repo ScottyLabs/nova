@@ -39,3 +39,25 @@
     opacity: 1;
   }
 }
+
+/* tap on touch screens: one quick turn around the vertical axis */
+.twirl {
+  animation: twirl 1.2s cubic-bezier(0.45, 0, 0.2, 1);
+}
+@keyframes twirl {
+  from {
+    transform: perspective(900px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(900px) rotateY(360deg);
+  }
+}
+.wordmark {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .twirl {
+    animation: none;
+  }
+}

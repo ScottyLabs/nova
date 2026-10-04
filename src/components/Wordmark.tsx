@@ -6,9 +6,9 @@ import css from "./Wordmark.module.css";
 
 type Metal = ReturnType<typeof createMetalWordmark>;
 
-/** NOVA orbit wordmark (340:1616). Flat white; on hover (or a tap on touch
-    screens) it turns into spinning 3D chrome — three.js, loaded in the
-    background once the page is idle. */
+/** NOVA orbit wordmark (340:1616). Flat white; on hover it turns into spinning
+    3D chrome (three.js, loaded in the background once the page is idle). On
+    touch screens a tap gives the flat mark a quick twirl instead. */
 export function Wordmark({ className }: { className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
   const metal = useRef<Metal | null>(null);
@@ -16,7 +16,7 @@ export function Wordmark({ className }: { className?: string }) {
   const [live, setLive] = useState(false); // 3D showing instead of the flat mark
 
   useEffect(() => {
-    if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+    if (!matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) return;
     let cancelled = false;
     const load = () =>
       import("../lib/metalWordmark").then(({ createMetalWordmark }) => {
@@ -38,13 +38,22 @@ export function Wordmark({ className }: { className?: string }) {
     };
   }, []);
 
-  // touch screens have no hover: a tap gives one full chrome turn instead
-  const touch = () => matchMedia("(hover: none)").matches;
+  // touch screens have no hover: a tap gives the flat mark a quick twirl on
+  // the black page
+  const logo = useRef<HTMLImageElement>(null);
   const tap = () => {
-    if (!touch() || !metal.current) return;
+    if (!matchMedia("(hover: none)").matches) return;
+    const el = logo.current;
+    if (!el) return;
+    // page drops to black for the twirl, as it does for the desktop hover
     document.documentElement.dataset.void = "";
-    setLive(true);
-    metal.current.spinOnce();
+    el.classList.remove(css["twirl"]);
+    void el.offsetWidth; // restart the animation on every tap
+    el.classList.add(css["twirl"]);
+  };
+  const twirled = () => {
+    logo.current?.classList.remove(css["twirl"]);
+    delete document.documentElement.dataset.void;
   };
   const enter = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -70,7 +79,7 @@ export function Wordmark({ className }: { className?: string }) {
       onPointerLeave={leave}
       onClick={tap}
     >
-      <img className={css["logo"]} src={orbit} alt="NOVA" />
+      <img ref={logo} className={css["logo"]} src={orbit} alt="NOVA" onAnimationEnd={twirled} />
       <div ref={stage} className={css["metal"]} aria-hidden />
     </div>
   );
