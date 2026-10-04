@@ -1,5 +1,7 @@
 import star from "../assets/cover/footer-star.png";
+import type { CSSProperties } from "react";
 import { Countdown } from "../components/Countdown";
+import { Scramble } from "../components/Scramble";
 import { EVENT_DATE } from "./Hero";
 import css from "./Schedule.module.css";
 
@@ -37,11 +39,17 @@ export function Schedule() {
           </p>
         </div>
         <ol className={css["slots"]}>
-          {schedule.map(({ start, end, detail }) => (
-            <li key={detail} className={css["slot"]} data-reveal>
+          {schedule.map(({ start, end, detail }, i) => (
+            <li
+              key={detail}
+              className={css["slot"]}
+              data-reveal="row"
+              style={{ "--i": i } as CSSProperties}
+            >
+              {/* each row a beat after the last: it rises, its time decodes,
+                  and its rule draws left to right */}
               <span className={css["time"]}>
-                {start}
-                {end && ` – ${end}`}
+                <Scramble text={end ? `${start} – ${end}` : start} delay={120 + i * 90} onView />
               </span>
               <span className={`body-sc ${css["detail"]}`}>{detail}</span>
             </li>
