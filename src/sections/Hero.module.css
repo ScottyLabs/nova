@@ -176,8 +176,8 @@
   border: 1px solid #000;
   color: var(--graphite);
   font-family: var(--font-mono);
-  /* same size as the tagline (.mono-small) */
-  font-size: max(12px, calc(22 * var(--u)));
+  /* same size as the floating words */
+  font-size: calc(43.778 * var(--u));
   line-height: 0.96;
   letter-spacing: -0.03em;
   white-space: nowrap;
