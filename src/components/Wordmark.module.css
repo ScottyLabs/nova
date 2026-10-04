@@ -52,9 +52,11 @@
     transform: perspective(900px) rotateY(360deg);
   }
 }
-.wordmark {
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
+/* touch screens only (taps twirl it); desktop stays exactly as it was */
+@media (hover: none) {
+  .wordmark {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .twirl {
