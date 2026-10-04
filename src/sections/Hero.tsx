@@ -9,7 +9,7 @@ import { Wordmark } from "../components/Wordmark";
 import css from "./Hero.module.css";
 
 export const EVENT_DATE = "11.7.2026";
-export const REGISTRATION_OPENS = "10.4.2026";
+export const REGISTRATION_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSc_njv1cap-9OFZeg2NTzw5EVUKniTUsPZ6gSdkkl_b6ksHDA/viewform";
 
 export function Hero() {
   // Intro: hold everything until the art has loaded (or 2.5s pass), then the
@@ -74,9 +74,9 @@ export function Hero() {
         <Scramble text="AI_" delay={720} play={intro} />
       </p>
 
-      <p className={css["register"]}>
-        <Scramble text={`Registration opens ${REGISTRATION_OPENS}`} delay={880} play={intro} />
-      </p>
+      <a className={css["register"]} href={REGISTRATION_LINK}>
+        <Scramble text={"Register now!"} delay={880} play={intro} />
+      </a>
     </section>
   );
 }
