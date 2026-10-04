@@ -61,8 +61,8 @@
   display: grid;
   grid-template-columns: subgrid;
   align-items: baseline;
-  position: relative;
   padding: 24px 0;
+  border-bottom: 1px solid rgb(43 43 43 / 0.25);
   transition: padding 0.3s ease, color 0.2s ease;
   &:hover {
     color: var(--cobalt);
@@ -103,38 +103,12 @@
   min-width: 100%;
 }
 
-/* Row entrance: staggered by --i. The row rises without the global blur, and
-   its rule (drawn as ::after instead of a border) sweeps in from the left. */
+/* Row entrance: a plain, slow fade, each row a little after the one above. */
 .slot[data-reveal="row"] {
   filter: none;
-  translate: 0 18px;
+  translate: none;
   transition:
-    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i) * 90ms),
-    translate 1s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i) * 90ms),
+    opacity 1.4s ease calc(var(--i) * 80ms),
     padding 0.3s ease,
     color 0.2s ease;
-}
-.slot[data-reveal="row"]:global(.is-in) {
-  translate: 0 0;
-}
-.slot::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: rgb(43 43 43 / 0.25);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.2s cubic-bezier(0.7, 0, 0.2, 1) calc(var(--i) * 90ms + 150ms);
-}
-.slot:global(.is-in)::after {
-  transform: scaleX(1);
-}
-@media (prefers-reduced-motion: reduce) {
-  .slot::after {
-    transform: none;
-    transition: none;
-  }
 }
