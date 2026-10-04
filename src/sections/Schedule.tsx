@@ -1,7 +1,6 @@
 import star from "../assets/cover/footer-star.png";
 import type { CSSProperties } from "react";
 import { Countdown } from "../components/Countdown";
-import { Scramble } from "../components/Scramble";
 import { EVENT_DATE } from "./Hero";
 import css from "./Schedule.module.css";
 
@@ -46,10 +45,9 @@ export function Schedule() {
               data-reveal="row"
               style={{ "--i": i } as CSSProperties}
             >
-              {/* each row a beat after the last: it rises, its time decodes,
-                  and its rule draws left to right */}
               <span className={css["time"]}>
-                <Scramble text={end ? `${start} – ${end}` : start} delay={120 + i * 90} onView />
+                {start}
+                {end && ` – ${end}`}
               </span>
               <span className={`body-sc ${css["detail"]}`}>{detail}</span>
             </li>
