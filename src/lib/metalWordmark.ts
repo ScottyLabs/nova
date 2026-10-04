@@ -104,6 +104,9 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   fit();
 
   let hovered = false;
+  // a single tap-triggered turn (touch screens): eased, fixed length
+  let once: { from: number; start: number } | null = null;
+  const ONCE_MS = 2400;
   let speed = 0;
   let raf = 0;
   let last = 0;
@@ -113,7 +116,16 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
     last = now;
     speed += ((hovered ? SPIN : 0) - speed) * Math.min(1, SPIN_EASE * dt);
     let rest = false;
-    if (hovered || speed > 0.25) {
+    if (once) {
+      const k = Math.min(1, (now - once.start) / ONCE_MS);
+      const e = k < 0.5 ? 4 * k ** 3 : 1 - (-2 * k + 2) ** 3 / 2;
+      pivot.rotation.y = once.from + e * Math.PI * 2;
+      if (k >= 1) {
+        once = null;
+        pivot.rotation.y = 0;
+        rest = true;
+      }
+    } else if (hovered || speed > 0.25) {
       pivot.rotation.y += speed * dt;
     } else {
       // wind down onto the nearest front-facing turn
@@ -136,6 +148,15 @@ export function createMetalWordmark(container: HTMLElement, svg: string, onRest:
   return {
     setHover(on: boolean) {
       hovered = on;
+      if (!raf) {
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
+      }
+    },
+    /** one full eased turn, then rest (for a tap on touch screens) */
+    spinOnce() {
+      if (once) return;
+      once = { from: pivot.rotation.y % (Math.PI * 2), start: performance.now() };
       if (!raf) {
         last = performance.now();
         raf = requestAnimationFrame(frame);

@@ -6,8 +6,9 @@ import css from "./Wordmark.module.css";
 
 type Metal = ReturnType<typeof createMetalWordmark>;
 
-/** NOVA orbit wordmark (340:1616). Flat white; on hover it turns into spinning 3D
-    chrome (three.js, loaded in the background once the page is idle). */
+/** NOVA orbit wordmark (340:1616). Flat white; on hover (or a tap on touch
+    screens) it turns into spinning 3D chrome — three.js, loaded in the
+    background once the page is idle. */
 export function Wordmark({ className }: { className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
   const metal = useRef<Metal | null>(null);
@@ -15,13 +16,15 @@ export function Wordmark({ className }: { className?: string }) {
   const [live, setLive] = useState(false); // 3D showing instead of the flat mark
 
   useEffect(() => {
-    if (!matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) return;
+    if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
     let cancelled = false;
     const load = () =>
       import("../lib/metalWordmark").then(({ createMetalWordmark }) => {
         if (cancelled || !stage.current) return;
         metal.current = createMetalWordmark(stage.current, svgSource, () => {
-          if (!hovering.current) setLive(false);
+          if (hovering.current) return;
+          setLive(false);
+          delete document.documentElement.dataset.void;
         });
         if (hovering.current) metal.current.setHover(true);
       });
@@ -35,7 +38,16 @@ export function Wordmark({ className }: { className?: string }) {
     };
   }, []);
 
-  const enter = () => {
+  // touch screens have no hover: a tap gives one full chrome turn instead
+  const touch = () => matchMedia("(hover: none)").matches;
+  const tap = () => {
+    if (!touch() || !metal.current) return;
+    document.documentElement.dataset.void = "";
+    setLive(true);
+    metal.current.spinOnce();
+  };
+  const enter = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
     hovering.current = true;
     // the whole page goes to black around the mark (see [data-void] in index.css)
     document.documentElement.dataset.void = "";
@@ -43,7 +55,8 @@ export function Wordmark({ className }: { className?: string }) {
     setLive(true);
     metal.current.setHover(true);
   };
-  const leave = () => {
+  const leave = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
     hovering.current = false;
     delete document.documentElement.dataset.void;
     metal.current?.setHover(false);
@@ -55,6 +68,7 @@ export function Wordmark({ className }: { className?: string }) {
       data-live={live || undefined}
       onPointerEnter={enter}
       onPointerLeave={leave}
+      onClick={tap}
     >
       <img className={css["logo"]} src={orbit} alt="NOVA" />
       <div ref={stage} className={css["metal"]} aria-hidden />
