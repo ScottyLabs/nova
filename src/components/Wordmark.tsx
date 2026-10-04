@@ -8,7 +8,7 @@ type Metal = ReturnType<typeof createMetalWordmark>;
 
 /** NOVA orbit wordmark (340:1616). Flat white; on hover it turns into spinning
     3D chrome (three.js, loaded in the background once the page is idle). On
-    touch screens a tap gives the flat mark a quick twirl instead. */
+    touch screens a tap plays one quick chrome twirl on the black page. */
 export function Wordmark({ className }: { className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
   const metal = useRef<Metal | null>(null);
@@ -16,7 +16,7 @@ export function Wordmark({ className }: { className?: string }) {
   const [live, setLive] = useState(false); // 3D showing instead of the flat mark
 
   useEffect(() => {
-    if (!matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) return;
+    if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
     let cancelled = false;
     const load = () =>
       import("../lib/metalWordmark").then(({ createMetalWordmark }) => {
@@ -38,15 +38,20 @@ export function Wordmark({ className }: { className?: string }) {
     };
   }, []);
 
-  // touch screens have no hover: a tap gives the flat mark a quick twirl on
-  // the black page
+  // touch screens have no hover: a tap drops the page to black and gives the
+  // chrome NOVA one quick twirl. If the 3D hasn't loaded yet, the flat mark
+  // twirls instead, so a tap always does something.
   const logo = useRef<HTMLImageElement>(null);
   const tap = () => {
     if (!matchMedia("(hover: none)").matches) return;
+    document.documentElement.dataset.void = "";
+    if (metal.current) {
+      setLive(true);
+      metal.current.spinOnce();
+      return;
+    }
     const el = logo.current;
     if (!el) return;
-    // page drops to black for the twirl, as it does for the desktop hover
-    document.documentElement.dataset.void = "";
     el.classList.remove(css["twirl"]);
     void el.offsetWidth; // restart the animation on every tap
     el.classList.add(css["twirl"]);
