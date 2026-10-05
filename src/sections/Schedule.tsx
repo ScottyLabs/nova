@@ -14,8 +14,9 @@ const schedule: ITimeSlot[] = [
   { start: "10:30 AM", end: "11:00 AM", detail: "Opening ceremony" },
   { start: "11:00 AM", detail: "Hacking begins" },
   { start: "12:00 PM", end: "1:00 PM", detail: "Lunch" },
-  { start: "5:15 PM", end: "6:15 PM", detail: "Dinner" },
-  { start: "6:15 PM", end: "7:45 PM", detail: "Presentations" },
+  { start: "17:00 PM", detail: "Hacking ends" },
+  { start: "5:15 PM", end: "6:00 PM", detail: "Dinner" },
+  { start: "6:00 PM", end: "7:45 PM", detail: "Presentations" },
   { start: "7:45 PM", end: "8:30 PM", detail: "People\u2019s choice" },
   { start: "8:30 PM", end: "9:00 PM", detail: "Closing ceremony" },
 ];
