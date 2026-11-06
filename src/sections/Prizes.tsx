@@ -16,28 +16,68 @@ interface IGrandPrize {
 
 interface IPrizeTrack {
   name: string;
-  detail: string;
+  /** a track can have sub-tracks (title + paragraphs) or just paragraphs */
+  details: { title?: string; paragraphs: string[] }[];
 }
 
-/* PLACEHOLDER: every value below stands in for the real prize list. Swap the
-   strings when tracks are confirmed; the layout needs no other changes. */
-const DETAIL = "Track details to be announced.";
-
+/* Copy from the NOVA Hacker Guide 2026. 2nd and 3rd place amounts are still
+   placeholders. */
 const GRAND_PRIZES: IGrandPrize[] = [
-  { place: "1st place", amount: "$TBA", emblem: emblemFirst, width: 308, offset: 12.5 },
+  { place: "Grand prize", amount: "$2000", emblem: emblemFirst, width: 308, offset: 12.5 },
   { place: "2nd place", amount: "$TBA", emblem: emblemSecond, width: 329, offset: 2.9 },
   { place: "3rd place", amount: "$TBA", emblem: emblemThird, width: 313, offset: 14 },
 ];
 
-const makeTracks = (label: string, count: number): IPrizeTrack[] =>
-  Array.from({ length: count }, (_, i) => ({
-    name: `${label} ${String(i + 1).padStart(2, "0")}`,
-    detail: DETAIL,
-  }));
-
 const GROUPS: { name: string; tracks: IPrizeTrack[] }[] = [
-  { name: "Themed prizes", tracks: makeTracks("Themed track", 6) },
-  { name: "Sponsor prizes", tracks: makeTracks("Sponsor track", 6) },
+  {
+    name: "Sponsor tracks",
+    tracks: [
+      {
+        name: "DoorDash",
+        details: [
+          {
+            title: "Front House \u2014 Customer-Facing",
+            paragraphs: [
+              "During peak periods, restaurant staff juggle orders from multiple sources while packing food, checking items and coordinating pickups. These tasks require significant labour and constant communication, increasing the risk of missing items, mixed-up orders and incorrect handoffs.",
+              "How might AI help make this process smoother, easier and less prone to errors for staff and customers?",
+            ],
+          },
+          {
+            title: "Back House \u2014 Behind The Scenes",
+            paragraphs: [
+              "Restaurant owners must manage inventory, staffing and finances while keeping daily operations running. Business records are often scattered across sales reports, supplier invoices, receipts and payouts. Bringing this information together requires significant manual work, making it difficult to track performance, spot issues and plan ahead.",
+              "How might AI simplify these tasks and help owners make more informed decisions?",
+            ],
+          },
+        ],
+      },
+      {
+        name: "Sandia National Laboratories",
+        details: [{ paragraphs: ["More information at the Sandia tech talk on Friday"] }],
+      },
+    ],
+  },
+  {
+    name: "Prize tracks",
+    tracks: [
+      {
+        name: "Most InNOVAtive",
+        details: [{ paragraphs: ["The team who presents the most innovative ideas"] }],
+      },
+      {
+        name: "Beyond Limits",
+        details: [{ paragraphs: ["The team who approaches their ideas with the most unique methods"] }],
+      },
+      {
+        name: "Looks Good, Works Good",
+        details: [{ paragraphs: ["The team who designed their product with the best user design"] }],
+      },
+      {
+        name: "Community Favorite",
+        details: [{ paragraphs: ["The winner of the People\u2019s Choice vote"] }],
+      },
+    ],
+  },
 ];
 
 export function Prizes() {
@@ -73,7 +113,7 @@ export function Prizes() {
               {group.name}
             </h3>
             <ul className={css["tracks"]}>
-              {group.tracks.map(({ name, detail }, i) => (
+              {group.tracks.map(({ name, details }, i) => (
                 <li
                   key={name}
                   className={css["track"]}
@@ -85,7 +125,16 @@ export function Prizes() {
                       <span className={`body-sc ${css["name"]}`}>{name}</span>
                       <span className={css["toggle"]} aria-hidden />
                     </summary>
-                    <p className={`body-sc ${css["detail"]}`}>{detail}</p>
+                    <div className={css["details"]}>
+                      {details.map(({ title, paragraphs }) => (
+                        <div key={title ?? paragraphs[0]} className={css["detail"]}>
+                          {title && <h4 className={`label ${css["detailTitle"]}`}>{title}</h4>}
+                          {paragraphs.map((text) => (
+                            <p key={text} className="body-sc">{text}</p>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </details>
                 </li>
               ))}
