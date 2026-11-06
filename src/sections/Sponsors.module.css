@@ -1,10 +1,9 @@
 .sponsors {
-  --rule: rgb(43 43 43 / 0.25);
+  --rule: rgb(43 43 43 / 0.16);
   padding: 0 0 clamp(60px, 8vw, 120px);
 }
 .head {
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--rule);
   @media (max-width: 700px) {
     text-align: center;
   }
