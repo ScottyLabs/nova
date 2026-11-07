@@ -79,7 +79,6 @@ export function Prizes() {
       <div className="clamp-width">
         <div className={css["head"]} data-reveal>
           <h2 className="section-title" data-reveal="wipe">Prize tracks</h2>
-          <p className={`subhead ${css["note"]}`}>_More to be announced soon</p>
         </div>
 
         <ol className={css["grand"]}>
