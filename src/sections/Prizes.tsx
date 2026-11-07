@@ -1,17 +1,12 @@
 import type { CSSProperties } from "react";
 import bigStar from "../assets/prizes/big-star.webp";
 import emblemFirst from "../assets/prizes/emblem-first.svg";
-import emblemSecond from "../assets/prizes/emblem-second.svg";
-import emblemThird from "../assets/prizes/emblem-third.svg";
 import css from "./Prizes.module.css";
 
 interface IGrandPrize {
   place: string;
   amount: string;
   emblem: string;
-  /** emblem width and its offset from the text, in Figma px (814:184) */
-  width: number;
-  offset: number;
 }
 
 interface IPrizeTrack {
@@ -20,12 +15,9 @@ interface IPrizeTrack {
   details: { title?: string; paragraphs: string[] }[];
 }
 
-/* Copy from the NOVA Hacker Guide 2026. 2nd and 3rd place amounts are still
-   placeholders. */
+/* Copy from the NOVA Hacker Guide 2026. */
 const GRAND_PRIZES: IGrandPrize[] = [
-  { place: "Grand prize", amount: "$2000", emblem: emblemFirst, width: 308, offset: 12.5 },
-  { place: "2nd place", amount: "$TBA", emblem: emblemSecond, width: 329, offset: 2.9 },
-  { place: "3rd place", amount: "$TBA", emblem: emblemThird, width: 313, offset: 14 },
+  { place: "Grand prize", amount: "$2000", emblem: emblemFirst },
 ];
 
 const GROUPS: { name: string; tracks: IPrizeTrack[] }[] = [
@@ -91,12 +83,12 @@ export function Prizes() {
         </div>
 
         <ol className={css["grand"]}>
-          {GRAND_PRIZES.map(({ place, amount, emblem, width, offset }, i) => (
+          {GRAND_PRIZES.map(({ place, amount, emblem }, i) => (
             <li
               key={place}
               className={css["grandItem"]}
               data-reveal="row"
-              style={{ "--i": i, "--w": width, "--dy": offset } as CSSProperties}
+              style={{ "--i": i } as CSSProperties}
             >
               <img className={css["emblem"]} src={emblem} alt="" />
               <div className={css["prize"]}>

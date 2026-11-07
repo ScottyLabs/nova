@@ -34,15 +34,15 @@
   text-align: right;
 }
 
-/* Grand prizes: a white emblem per column with the amount centred in it
+/* A centred grand prize, retaining the original column's proportions
    (Figma 814:184). Sizes are in that frame's units, 402 = one column. */
 .grand {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 24px;
+  grid-template-columns: minmax(0, calc((100% - 48px) / 3));
+  justify-content: center;
 }
 .grandItem {
   container-type: inline-size;
@@ -54,9 +54,9 @@
   }
 }
 .emblem {
-  width: calc(var(--w) / 402 * 100cqi);
+  width: calc(308 / 402 * 100cqi);
   height: auto;
-  translate: 0 calc(var(--dy) / 402 * 100cqi);
+  translate: 0 calc(12.5 / 402 * 100cqi);
 }
 .prize {
   position: relative;
@@ -169,7 +169,7 @@ details[open] .toggle::after {
 }
 
 @media (max-width: 700px) {
-  /* keep the star hero-sized on phones, centred behind the stacked emblems */
+  /* keep the star hero-sized on phones, centred behind the emblem */
   .bigStar {
     --u: calc(100cqi / 560);
     left: calc(50cqi - 950 * var(--u));
